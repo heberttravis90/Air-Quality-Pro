@@ -17,7 +17,7 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0;background:linear-gradient(180deg,#061018 0%,#08131c 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100%}
-body{padding-bottom:158px}
+body{padding-bottom:176px}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
 a{color:inherit}
@@ -38,7 +38,7 @@ a{color:inherit}
 .section-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:20px 2px 8px}.section-title h2{font-size:16px;margin:0}.section-title small{color:var(--muted)}
 .workflow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.flowbtn{min-height:108px;text-align:left;border:1px solid #1c4452;border-radius:17px;background:#0d1e29;color:var(--text);padding:13px;transition:.12s transform,.12s border-color,.12s background}.flowbtn:active{transform:scale(.975);background:#12303a}.flowbtn .num{width:26px;height:26px;border-radius:9px;background:#133b3c;color:var(--accent2);display:grid;place-items:center;font-size:11px;font-weight:900;margin-bottom:12px}.flowbtn b{display:block;font-size:13px}.flowbtn span{display:block;font-size:10px;color:var(--muted);margin-top:4px;line-height:1.35}
 .btnrow{display:flex;flex-wrap:wrap;gap:8px}.btn{appearance:none;border:1px solid #25505c;border-radius:12px;padding:10px 13px;color:var(--text);background:#10242e;font-weight:760;font-size:12px;transition:.12s transform,.12s filter}
-.screen-nav{display:none}.screen-dock{position:fixed;left:0;right:0;bottom:calc(64px + env(safe-area-inset-bottom));z-index:69;padding:8px 10px;background:linear-gradient(180deg,rgba(6,16,24,.15),rgba(6,16,24,.98) 30%);pointer-events:none}.screen-dock-inner{max-width:680px;margin:0 auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.screen-dock .btn{pointer-events:auto;min-height:46px;font-size:12px;box-shadow:0 8px 24px rgba(0,0,0,.28)}.screen-dock .btn:only-child{grid-column:1/-1}.screen-dock .nav-back{text-align:left}.screen-dock .nav-next{text-align:right}.screen-dock .nav-home{text-align:center}.btn:active{transform:scale(.97);filter:brightness(1.2)}.btn.primary{background:linear-gradient(180deg,#26ceb0,#19aa91);color:#03120f;border-color:#40e0c2}.btn.blue{background:#153f5f;border-color:#246c9f}.btn.warn{background:#5a4313;border-color:#8f6d24}.btn.danger{background:#471a24;border-color:#7f3040}.btn.ghost{background:transparent}.btn.full{width:100%;justify-content:center}.btn.mini{padding:6px 9px;border-radius:9px;font-size:10px}
+.screen-nav{display:flex;gap:9px;justify-content:space-between;margin:18px 0 4px;padding:10px 0}.screen-nav .btn{flex:1;min-height:46px}.screen-dock{display:block!important;visibility:visible!important;opacity:1!important;position:fixed;left:0;right:0;bottom:calc(68px + env(safe-area-inset-bottom));z-index:85;padding:9px 10px 10px;background:#081923;border-top:1px solid #24505c;border-bottom:1px solid #163642;box-shadow:0 -10px 28px rgba(0,0,0,.38);pointer-events:none}.screen-dock-inner{max-width:680px;margin:0 auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.screen-dock .btn{pointer-events:auto;min-height:46px;font-size:12px;box-shadow:0 8px 24px rgba(0,0,0,.28)}.screen-dock .btn:only-child{grid-column:1/-1}.screen-dock .nav-back{text-align:left}.screen-dock .nav-next{text-align:right}.screen-dock .nav-home{text-align:center}.btn:active{transform:scale(.97);filter:brightness(1.2)}.btn.primary{background:linear-gradient(180deg,#26ceb0,#19aa91);color:#03120f;border-color:#40e0c2}.btn.blue{background:#153f5f;border-color:#246c9f}.btn.warn{background:#5a4313;border-color:#8f6d24}.btn.danger{background:#471a24;border-color:#7f3040}.btn.ghost{background:transparent}.btn.full{width:100%;justify-content:center}.btn.mini{padding:6px 9px;border-radius:9px;font-size:10px}
 .formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}label{font-size:11px;color:#9fb5c0;font-weight:700}input,select,textarea{width:100%;margin-top:5px;border:1px solid #214150;border-radius:11px;background:#07151d;color:var(--text);padding:10px 11px;outline:none}input:focus,select:focus,textarea:focus{border-color:#34a994;box-shadow:0 0 0 3px rgba(37,208,177,.08)}textarea{resize:vertical;min-height:86px}.inline{display:flex;gap:8px;align-items:flex-end}.inline>*{flex:1}.check{display:flex;align-items:center;gap:8px;padding:10px;border:1px solid #173541;background:#0a1922;border-radius:11px;color:#c6d6dd;font-size:11px}.check input{width:auto;margin:0;accent-color:var(--accent)}
 .list{display:flex;flex-direction:column;gap:8px}.item{border:1px solid #183744;background:#0a1922;border-radius:14px;padding:12px;display:flex;justify-content:space-between;align-items:center;gap:10px}.item .main{min-width:0}.item b{display:block;font-size:12px}.item .meta{font-size:10px;color:var(--muted);margin-top:4px;line-height:1.35}.item .actions{display:flex;gap:5px;flex-shrink:0}.pill{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:999px;font-size:9px;font-weight:850;border:1px solid #28505f;background:#10242d;color:#c6d8df}.pill.good{color:#84efad;border-color:#246b46;background:#0c2a1b}.pill.warn{color:#ffe18a;border-color:#6b5928;background:#2c250e}.pill.bad{color:#ff9aa8;border-color:#743443;background:#30141a}.pill.info{color:#95cdf8;border-color:#315e80;background:#11293c}
 .alert{border-left:3px solid var(--warn);background:#211c0c;border-radius:10px;padding:10px 11px;margin:7px 0;font-size:11px;color:#e9ddb7}.alert.bad{border-color:var(--bad);background:#251016;color:#f3c1c9}.alert.good{border-color:var(--good);background:#0c2116;color:#b7e7c9}.empty{padding:25px 14px;text-align:center;border:1px dashed #254452;border-radius:14px;color:#78929f;font-size:11px}.progress{height:8px;border-radius:999px;background:#08131a;overflow:hidden;border:1px solid #19313d}.progress span{display:block;height:100%;background:linear-gradient(90deg,#1fb89c,#45e6ca)}
@@ -56,7 +56,7 @@ hr{border:0;border-top:1px solid #17323e;margin:14px 0}.muted{color:var(--muted)
 </style>
 </head>
 <body>
-<header class="topbar"><div class="brandrow"><div class="brand"><div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 15c3-3 5 3 9 0s5-1 7 0" stroke="#5be6d1" stroke-width="1.8" stroke-linecap="round"/><path d="M4 10c2.5-2.6 4.6 2.5 8 0 3.3-2.5 5.6-.7 8 0" stroke="#42b6f5" stroke-width="1.8" stroke-linecap="round"/><path d="M4 5.5c2-2 3.5 1.5 6 0" stroke="#5be6d1" stroke-width="1.8" stroke-linecap="round"/></svg></div><div><h1>Air Quality Pro</h1><small>Field operations & compliance workflow</small></div></div><div id="activeJobChip" class="jobchip">No active job</div></div></header>
+<header class="topbar"><div class="brandrow"><div class="brand"><div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 15c3-3 5 3 9 0s5-1 7 0" stroke="#5be6d1" stroke-width="1.8" stroke-linecap="round"/><path d="M4 10c2.5-2.6 4.6 2.5 8 0 3.3-2.5 5.6-.7 8 0" stroke="#42b6f5" stroke-width="1.8" stroke-linecap="round"/><path d="M4 5.5c2-2 3.5 1.5 6 0" stroke="#5be6d1" stroke-width="1.8" stroke-linecap="round"/></svg></div><div><h1>Air Quality Pro</h1><small>Field operations & compliance workflow • v0.5</small></div></div><div id="activeJobChip" class="jobchip">No active job</div></div></header>
 
 <main class="wrap">
 <section id="page-home" class="page active">
@@ -197,7 +197,7 @@ hr{border:0;border-top:1px solid #17323e;margin:14px 0}.muted{color:var(--muted)
 
 <script>
 (() => {
-// Build v0.4 — persistent on-screen Back / Next navigation dock. Keep the storage key unchanged so existing jobs remain available.
+// Build v0.5 — visible screen navigation + service-worker cache refresh. Storage key intentionally unchanged.
 const KEY='airQualityPro_v02';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const uid=p=>(p||'id')+'_'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
@@ -299,7 +299,7 @@ $('#demoBtn').onclick=()=>{if(state.jobs.length&&!confirm('Add a demo job alongs
 
 // initialize defaults
 $('#depDate').value=today();$('#depTime').value=nowTime();$('#recDate').value=today();$('#recTime').value=nowTime();
-if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){navigator.serviceWorker.register('./sw.js?v=05',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});}
 updateScreenNav('home');
 renderAll();
 })();
