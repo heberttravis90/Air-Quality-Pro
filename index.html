@@ -17,7 +17,7 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0;background:linear-gradient(180deg,#061018 0%,#08131c 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100%}
-body{padding-bottom:88px}
+body{padding-bottom:158px}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
 a{color:inherit}
@@ -38,7 +38,7 @@ a{color:inherit}
 .section-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:20px 2px 8px}.section-title h2{font-size:16px;margin:0}.section-title small{color:var(--muted)}
 .workflow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.flowbtn{min-height:108px;text-align:left;border:1px solid #1c4452;border-radius:17px;background:#0d1e29;color:var(--text);padding:13px;transition:.12s transform,.12s border-color,.12s background}.flowbtn:active{transform:scale(.975);background:#12303a}.flowbtn .num{width:26px;height:26px;border-radius:9px;background:#133b3c;color:var(--accent2);display:grid;place-items:center;font-size:11px;font-weight:900;margin-bottom:12px}.flowbtn b{display:block;font-size:13px}.flowbtn span{display:block;font-size:10px;color:var(--muted);margin-top:4px;line-height:1.35}
 .btnrow{display:flex;flex-wrap:wrap;gap:8px}.btn{appearance:none;border:1px solid #25505c;border-radius:12px;padding:10px 13px;color:var(--text);background:#10242e;font-weight:760;font-size:12px;transition:.12s transform,.12s filter}
-.screen-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:18px 0 4px}.screen-nav .btn{min-height:46px;font-size:12px}.screen-nav .btn:only-child{grid-column:1/-1}.screen-nav .nav-back{text-align:left}.screen-nav .nav-next{text-align:right}.screen-nav .nav-home{text-align:center}.btn:active{transform:scale(.97);filter:brightness(1.2)}.btn.primary{background:linear-gradient(180deg,#26ceb0,#19aa91);color:#03120f;border-color:#40e0c2}.btn.blue{background:#153f5f;border-color:#246c9f}.btn.warn{background:#5a4313;border-color:#8f6d24}.btn.danger{background:#471a24;border-color:#7f3040}.btn.ghost{background:transparent}.btn.full{width:100%;justify-content:center}.btn.mini{padding:6px 9px;border-radius:9px;font-size:10px}
+.screen-nav{display:none}.screen-dock{position:fixed;left:0;right:0;bottom:calc(64px + env(safe-area-inset-bottom));z-index:69;padding:8px 10px;background:linear-gradient(180deg,rgba(6,16,24,.15),rgba(6,16,24,.98) 30%);pointer-events:none}.screen-dock-inner{max-width:680px;margin:0 auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.screen-dock .btn{pointer-events:auto;min-height:46px;font-size:12px;box-shadow:0 8px 24px rgba(0,0,0,.28)}.screen-dock .btn:only-child{grid-column:1/-1}.screen-dock .nav-back{text-align:left}.screen-dock .nav-next{text-align:right}.screen-dock .nav-home{text-align:center}.btn:active{transform:scale(.97);filter:brightness(1.2)}.btn.primary{background:linear-gradient(180deg,#26ceb0,#19aa91);color:#03120f;border-color:#40e0c2}.btn.blue{background:#153f5f;border-color:#246c9f}.btn.warn{background:#5a4313;border-color:#8f6d24}.btn.danger{background:#471a24;border-color:#7f3040}.btn.ghost{background:transparent}.btn.full{width:100%;justify-content:center}.btn.mini{padding:6px 9px;border-radius:9px;font-size:10px}
 .formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}label{font-size:11px;color:#9fb5c0;font-weight:700}input,select,textarea{width:100%;margin-top:5px;border:1px solid #214150;border-radius:11px;background:#07151d;color:var(--text);padding:10px 11px;outline:none}input:focus,select:focus,textarea:focus{border-color:#34a994;box-shadow:0 0 0 3px rgba(37,208,177,.08)}textarea{resize:vertical;min-height:86px}.inline{display:flex;gap:8px;align-items:flex-end}.inline>*{flex:1}.check{display:flex;align-items:center;gap:8px;padding:10px;border:1px solid #173541;background:#0a1922;border-radius:11px;color:#c6d6dd;font-size:11px}.check input{width:auto;margin:0;accent-color:var(--accent)}
 .list{display:flex;flex-direction:column;gap:8px}.item{border:1px solid #183744;background:#0a1922;border-radius:14px;padding:12px;display:flex;justify-content:space-between;align-items:center;gap:10px}.item .main{min-width:0}.item b{display:block;font-size:12px}.item .meta{font-size:10px;color:var(--muted);margin-top:4px;line-height:1.35}.item .actions{display:flex;gap:5px;flex-shrink:0}.pill{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:999px;font-size:9px;font-weight:850;border:1px solid #28505f;background:#10242d;color:#c6d8df}.pill.good{color:#84efad;border-color:#246b46;background:#0c2a1b}.pill.warn{color:#ffe18a;border-color:#6b5928;background:#2c250e}.pill.bad{color:#ff9aa8;border-color:#743443;background:#30141a}.pill.info{color:#95cdf8;border-color:#315e80;background:#11293c}
 .alert{border-left:3px solid var(--warn);background:#211c0c;border-radius:10px;padding:10px 11px;margin:7px 0;font-size:11px;color:#e9ddb7}.alert.bad{border-color:var(--bad);background:#251016;color:#f3c1c9}.alert.good{border-color:var(--good);background:#0c2116;color:#b7e7c9}.empty{padding:25px 14px;text-align:center;border:1px dashed #254452;border-radius:14px;color:#78929f;font-size:11px}.progress{height:8px;border-radius:999px;background:#08131a;overflow:hidden;border:1px solid #19313d}.progress span{display:block;height:100%;background:linear-gradient(90deg,#1fb89c,#45e6ca)}
@@ -52,7 +52,7 @@ a{color:inherit}
 hr{border:0;border-top:1px solid #17323e;margin:14px 0}.muted{color:var(--muted)}.small{font-size:10px}.right{text-align:right}
 @media(max-width:760px){.wrap{padding:12px}.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(2,1fr)}.workflow{grid-template-columns:repeat(2,1fr)}.modulegrid{grid-template-columns:repeat(2,1fr)}.formgrid{grid-template-columns:1fr}.hero h2{font-size:21px}.jobchip{max-width:38vw}.item{align-items:flex-start}.item .actions{flex-direction:column}}
 @media(max-width:430px){.g3{grid-template-columns:1fr}.modulegrid{grid-template-columns:1fr}.brand h1{font-size:16px}.logo{width:38px;height:38px}.jobchip{font-size:10px}}
-@media print{.topbar,.bottomnav,.btnrow,.no-print,.tabs{display:none!important}body{background:white;color:#111;padding:0}.wrap{max-width:none;padding:0}.page{display:none!important}.page.printable{display:block!important}.card,.hero{box-shadow:none;border:1px solid #aaa;background:white;color:#111}.muted,.sub,.item .meta{color:#555!important}.item{background:white;border-color:#aaa}.pill{border:1px solid #777;background:white;color:#111}.table th{background:#eee;color:#111}.table td,.table th{border-color:#bbb}.tablewrap{border-color:#aaa}}
+@media print{.topbar,.bottomnav,.screen-dock,.btnrow,.no-print,.tabs{display:none!important}body{background:white;color:#111;padding:0}.wrap{max-width:none;padding:0}.page{display:none!important}.page.printable{display:block!important}.card,.hero{box-shadow:none;border:1px solid #aaa;background:white;color:#111}.muted,.sub,.item .meta{color:#555!important}.item{background:white;border-color:#aaa}.pill{border:1px solid #777;background:white;color:#111}.table th{background:#eee;color:#111}.table td,.table th{border-color:#bbb}.tablewrap{border-color:#aaa}}
 </style>
 </head>
 <body>
@@ -178,6 +178,13 @@ hr{border:0;border-top:1px solid #17323e;margin:14px 0}.muted{color:var(--muted)
 </section>
 </main>
 
+<div id="screenNavDock" class="screen-dock no-print" aria-label="Screen navigation">
+  <div class="screen-dock-inner">
+    <button id="screenBackBtn" class="btn nav-back" data-go="home">← Back</button>
+    <button id="screenNextBtn" class="btn primary nav-next" data-go="jobs">Next →</button>
+  </div>
+</div>
+
 <nav class="bottomnav"><div class="navrow">
 <button class="navbtn active" data-go="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m3 11 9-7 9 7v9H5v-9"/><path d="M9 20v-6h6v6"/></svg>Home</button>
 <button class="navbtn" data-go="jobs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="15" rx="2"/><path d="M8 5V3m8 2V3M3 10h18"/></svg>Jobs</button>
@@ -190,7 +197,7 @@ hr{border:0;border-top:1px solid #17323e;margin:14px 0}.muted{color:var(--muted)
 
 <script>
 (() => {
-// Build v0.3 — screen navigation added. Keep the storage key unchanged so existing jobs remain available.
+// Build v0.4 — persistent on-screen Back / Next navigation dock. Keep the storage key unchanged so existing jobs remain available.
 const KEY='airQualityPro_v02';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const uid=p=>(p||'id')+'_'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
@@ -213,7 +220,23 @@ function getSamples(r=round()){return r?.samples||[]}
 function currentLocations(){return job()?.locations||[]}
 function modal(title,html){$('#modalTitle').textContent=title;$('#modalBody').innerHTML=html;$('#modalBack').classList.add('show')}
 function closeModal(){$('#modalBack').classList.remove('show')}
-function go(name){$$('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));$$('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.go===name));window.scrollTo({top:0,behavior:'smooth'});renderAll()}
+function updateScreenNav(name){
+  const cfg={
+    home:{back:null,next:['jobs','Next: Job setup →']},
+    jobs:{back:['home','← Back: Dashboard'],next:['site','Next: Site & locations →']},
+    site:{back:['jobs','← Back: Job setup'],next:['field','Next: Field operations →']},
+    field:{back:['site','← Back: Site & locations'],next:['samples','Next: Sample tracker →']},
+    samples:{back:['field','← Back: Field operations'],next:['custody','Next: Custody & report →']},
+    custody:{back:['samples','← Back: Sample tracker'],next:['more','Next: More tools →']},
+    more:{back:['custody','← Back: Custody & report'],next:['home','Dashboard']}
+  }[name]||{back:null,next:['home','Dashboard']};
+  const back=$('#screenBackBtn'), next=$('#screenNextBtn');
+  if(cfg.back){back.style.display='block';back.dataset.go=cfg.back[0];back.textContent=cfg.back[1]}else{back.style.display='none'}
+  if(cfg.next){next.style.display='block';next.dataset.go=cfg.next[0];next.textContent=cfg.next[1]}else{next.style.display='none'}
+  const inner=$('#screenNavDock .screen-dock-inner');
+  inner.style.gridTemplateColumns=cfg.back&&cfg.next?'repeat(2,minmax(0,1fr))':'1fr';
+}
+function go(name){$$('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));$$('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.go===name));updateScreenNav(name);window.scrollTo({top:0,behavior:'smooth'});renderAll()}
 function download(name,text,type='text/plain'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
 function sampleStatus(s){if(s.receivedAt)return'received';if(s.shippedAt)return'shipped';if(s.recoveredAt)return'recovered';return'deployed'}
 function statusPill(status){const map={deployed:['info','DEPLOYED'],recovered:['good','RECOVERED'],shipped:['warn','SHIPPED'],received:['good','LAB RECEIVED']};const m=map[status]||['','OPEN'];return `<span class="pill ${m[0]}">${m[1]}</span>`}
@@ -277,6 +300,7 @@ $('#demoBtn').onclick=()=>{if(state.jobs.length&&!confirm('Add a demo job alongs
 // initialize defaults
 $('#depDate').value=today();$('#depTime').value=nowTime();$('#recDate').value=today();$('#recTime').value=nowTime();
 if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+updateScreenNav('home');
 renderAll();
 })();
 </script>
