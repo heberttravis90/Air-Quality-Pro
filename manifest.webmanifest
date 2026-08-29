@@ -1,0 +1,9 @@
+{
+  "name": "Air Quality Pro",
+  "short_name": "Air Quality Pro",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0b0f12",
+  "theme_color": "#0b0f12",
+  "description": "Offline-first air quality operations platform; Method 325 field operations is the first module."
+}

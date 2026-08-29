@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0f12" />
+  <title>Air Quality Pro</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <style>
+    :root{
+      --bg:#0b0f12; --panel:#12181d; --panel2:#182027; --line:#2b3944;
+      --text:#f2f5f7; --muted:#a9b4bd; --ok:#39d98a; --warn:#ffc857;
+      --bad:#ff5d5d; --accent:#56b6ff; --off:#7a8791;
+      --shadow:0 8px 28px rgba(0,0,0,.28);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    body{min-height:100vh}
+    button,input,select,textarea{font:inherit}
+    .app{max-width:860px;margin:auto;padding:12px 12px 92px}
+    .topbar{position:sticky;top:0;z-index:5;background:linear-gradient(#0b0f12 80%,rgba(11,15,18,0));padding:10px 0 14px}
+    .brand{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .brand h1{font-size:22px;margin:0}
+    .brand small{color:var(--muted)}
+    .pill{padding:6px 10px;border-radius:999px;background:#17232b;border:1px solid var(--line);font-size:12px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:var(--shadow)}
+    .metric{font-size:30px;font-weight:800;margin:4px 0}
+    .label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+    h2{font-size:18px;margin:18px 0 10px}
+    h3{font-size:16px;margin:0 0 8px}
+    p{color:var(--muted);line-height:1.45}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:12px;padding:12px 14px;background:var(--accent);color:#001018;font-weight:800;cursor:pointer;min-height:46px}
+    .btn.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}
+    .btn.ok{background:var(--ok);color:#032113}
+    .btn.warn{background:var(--warn);color:#2a1f00}
+    .btn.bad{background:var(--bad);color:#2b0000}
+    .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+    .btn.block{width:100%}
+    .actions{display:flex;gap:8px;flex-wrap:wrap}
+    .list{display:flex;flex-direction:column;gap:8px}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px;background:var(--panel);border:1px solid var(--line);border-radius:14px}
+    .row .main{min-width:0}
+    .row .title{font-weight:800}
+    .row .sub{font-size:12px;color:var(--muted);margin-top:4px}
+    .status{font-size:12px;font-weight:800;border-radius:999px;padding:6px 9px;white-space:nowrap}
+    .s-not{background:#26313a;color:#c6ced4}
+    .s-ok{background:rgba(57,217,138,.14);color:var(--ok)}
+    .s-warn{background:rgba(255,200,87,.14);color:var(--warn)}
+    .s-bad{background:rgba(255,93,93,.14);color:var(--bad)}
+    .s-info{background:rgba(86,182,255,.14);color:var(--accent)}
+    .tabs{position:fixed;bottom:0;left:0;right:0;background:#0f1519;border-top:1px solid var(--line);display:flex;justify-content:center;z-index:9}
+    .tabs-inner{max-width:860px;width:100%;display:grid;grid-template-columns:repeat(5,1fr)}
+    .tab{padding:10px 4px 12px;text-align:center;color:var(--muted);font-size:11px;cursor:pointer}
+    .tab.active{color:var(--accent);font-weight:800}
+    .tab b{display:block;font-size:18px;margin-bottom:3px}
+    .view{display:none}.view.active{display:block}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field label{font-size:12px;color:var(--muted);font-weight:700}
+    input,select,textarea{width:100%;border-radius:12px;background:#0e1418;color:var(--text);border:1px solid var(--line);padding:12px}
+    textarea{min-height:86px;resize:vertical}
+    .section{margin-top:14px}
+    .notice{border-left:4px solid var(--accent);padding:12px;background:#10191f;border-radius:10px;color:var(--muted)}
+    .notice.warn{border-left-color:var(--warn)}
+    .notice.bad{border-left-color:var(--bad)}
+    .notice.ok{border-left-color:var(--ok)}
+    .progress{height:10px;background:#1b252c;border-radius:999px;overflow:hidden}
+    .progress > span{display:block;height:100%;background:var(--ok);width:0%}
+    dialog{border:none;border-radius:18px;background:var(--panel);color:var(--text);width:min(720px,94vw);padding:0;box-shadow:0 24px 80px rgba(0,0,0,.55)}
+    dialog::backdrop{background:rgba(0,0,0,.72)}
+    .modal-head{padding:16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+    .modal-body{padding:16px}
+    .x{border:none;background:transparent;color:var(--muted);font-size:24px;cursor:pointer}
+    .checklist{display:grid;gap:8px}
+    .check{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:12px;background:#0e1418}
+    .check input{width:auto}
+    .tiny{font-size:11px;color:var(--muted)}
+    .big-num{font-size:44px;font-weight:900}
+    .split{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+    .kpi{padding:12px;background:#0e1418;border:1px solid var(--line);border-radius:14px}
+    .empty{padding:20px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px}
+    @media(max-width:620px){
+      .form-grid,.grid{grid-template-columns:1fr}
+      .split{flex-direction:column}
+      .app{padding-left:10px;padding-right:10px}
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand">
+      <div>
+        <h1>Air Quality Pro</h1>
+        <small>Method 325 Field Operations · Alpha 0.1</small>
+      </div>
+      <span class="pill" id="offlinePill">Offline-ready</span>
+    </div>
+  </div>
+
+  <section id="view-home" class="view active">
+    <div class="grid">
+      <div class="card"><div class="label">Active Jobs</div><div class="metric" id="mJobs">0</div><div class="tiny">Monitoring periods not closed</div></div>
+      <div class="card"><div class="label">Open Issues</div><div class="metric" id="mIssues">0</div><div class="tiny">Exceptions needing attention</div></div>
+      <div class="card"><div class="label">Facilities</div><div class="metric" id="mFacilities">0</div><div class="tiny">Permanent facility records</div></div>
+      <div class="card"><div class="label">Samples Active</div><div class="metric" id="mSamples">0</div><div class="tiny">Prepared through recovered</div></div>
+    </div>
+    <h2>Upcoming / Active</h2>
+    <div id="homeActive" class="list"></div>
+    <h2>Quick Start</h2>
+    <div class="actions">
+      <button class="btn" onclick="openFacilityDialog()">+ Facility</button>
+      <button class="btn secondary" onclick="openPeriodDialog()">+ Monitoring Period</button>
+    </div>
+  </section>
+
+  <section id="view-facilities" class="view">
+    <div class="split">
+      <div>
+        <h2>Facilities</h2>
+        <p>Permanent facility and monitoring-location records.</p>
+      </div>
+      <button class="btn" onclick="openFacilityDialog()">+ Add Facility</button>
+    </div>
+    <div id="facilityList" class="list"></div>
+  </section>
+
+  <section id="view-field" class="view">
+    <div class="split">
+      <div>
+        <h2>Field Operations</h2>
+        <p>Select an active monitoring period.</p>
+      </div>
+      <button class="btn secondary" onclick="openPeriodDialog()">+ Period</button>
+    </div>
+    <div id="periodList" class="list"></div>
+  </section>
+
+  <section id="view-issues" class="view">
+    <h2>QA / Issues</h2>
+    <p>Open and resolved field exceptions. Alpha 0.1 preserves the record; it does not make compliance validity decisions.</p>
+    <div id="issueList" class="list"></div>
+  </section>
+
+  <section id="view-settings" class="view">
+    <h2>Settings & Data</h2>
+    <div class="card">
+      <h3>Offline Local Data</h3>
+      <p>Alpha 0.1 stores all project data on this device using local storage. Cloud sync is intentionally not included yet.</p>
+      <div class="actions">
+        <button class="btn secondary" onclick="exportData()">Export JSON Backup</button>
+        <button class="btn ghost" onclick="document.getElementById('importFile').click()">Import Backup</button>
+        <input id="importFile" type="file" accept="application/json" style="display:none" onchange="importData(event)">
+      </div>
+    </div>
+    <div class="card section">
+      <h3>Demo Data</h3>
+      <p>Load the fictional Bayou Refining training job used in our Method 325 walkthrough.</p>
+      <div class="actions">
+        <button class="btn warn" onclick="loadDemo()">Load Demo Job</button>
+        <button class="btn bad" onclick="resetAll()">Reset All Local Data</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="tabs">
+  <div class="tabs-inner">
+    <div class="tab active" data-view="home" onclick="nav('home')"><b>⌂</b>Home</div>
+    <div class="tab" data-view="facilities" onclick="nav('facilities')"><b>🏭</b>Facilities</div>
+    <div class="tab" data-view="field" onclick="nav('field')"><b>🧪</b>Field</div>
+    <div class="tab" data-view="issues" onclick="nav('issues')"><b>⚠</b>Issues</div>
+    <div class="tab" data-view="settings" onclick="nav('settings')"><b>⚙</b>Settings</div>
+  </div>
+</div>
+
+<dialog id="facilityDialog">
+  <div class="modal-head"><strong>New Facility</strong><button class="x" onclick="facilityDialog.close()">×</button></div>
+  <div class="modal-body">
+    <div class="form-grid">
+      <div class="field"><label>Facility Name</label><input id="fName" placeholder="Bayou Refining Complex"></div>
+      <div class="field"><label>Facility ID</label><input id="fId" placeholder="BRC-001"></div>
+      <div class="field"><label>Program</label><select id="fProgram"><option>EPA Method 325A/325B</option></select></div>
+      <div class="field"><label>Target Compound</label><select id="fTarget"><option>Benzene</option></select></div>
+      <div class="field"><label>Met Station ID</label><input id="fMet" placeholder="MET-01"></div>
+      <div class="field"><label>Default Sampler Height (ft)</label><input id="fHeight" type="number" step=".1" value="6.5"></div>
+    </div>
+    <div class="section field"><label>Facility Notes</label><textarea id="fNotes" placeholder="Access, security, client notes..."></textarea></div>
+    <div class="section actions">
+      <button class="btn" onclick="saveFacility()">Create Facility</button>
+      <button class="btn secondary" onclick="facilityDialog.close()">Cancel</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="stationDialog">
+  <div class="modal-head"><strong id="stationTitle">Monitoring Location</strong><button class="x" onclick="stationDialog.close()">×</button></div>
+  <div class="modal-body">
+    <input type="hidden" id="stFacility">
+    <input type="hidden" id="stEditId">
+    <div class="form-grid">
+      <div class="field"><label>Location ID</label><input id="stId" placeholder="ML-01"></div>
+      <div class="field"><label>Sampler Height (ft)</label><input id="stHeight" type="number" step=".1" value="6.5"></div>
+      <div class="field"><label>Latitude</label><input id="stLat" placeholder="30.xxxxxx"></div>
+      <div class="field"><label>Longitude</label><input id="stLng" placeholder="-90.xxxxxx"></div>
+      <div class="field"><label>Station Type</label><select id="stType"><option>Permanent</option><option>Temporary Alternate</option></select></div>
+      <div class="field"><label>Protective Hood</label><select id="stHood"><option>Installed</option><option>Needs Installation</option><option>Damaged</option></select></div>
+    </div>
+    <div class="section actions">
+      <button class="btn secondary" onclick="captureGPS('station')">Capture GPS</button>
+    </div>
+    <div class="section field"><label>Access / Reference Notes</label><textarea id="stNotes" placeholder="Gate, road, landmark, nearby obstruction..."></textarea></div>
+    <div class="section actions">
+      <button class="btn" onclick="saveStation()">Save Monitoring Location</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="periodDialog">
+  <div class="modal-head"><strong>New Monitoring Period</strong><button class="x" onclick="periodDialog.close()">×</button></div>
+  <div class="modal-body">
+    <div class="form-grid">
+      <div class="field"><label>Facility</label><select id="pFacility"></select></div>
+      <div class="field"><label>Period ID</label><input id="pId" placeholder="P01"></div>
+      <div class="field"><label>Deployment Date</label><input id="pDeploy" type="date"></div>
+      <div class="field"><label>Target Recovery Date</label><input id="pRecover" type="date"></div>
+      <div class="field"><label>Regulatory Profile</label>
+        <select id="pProfile">
+          <option value="BASE">Method 325A Base</option>
+          <option value="ALT122">Subpart CC / ALT-122</option>
+        </select>
+      </div>
+      <div class="field"><label>Sorbent</label>
+        <select id="pSorbent"><option>Carbopack X</option><option>Carbograph 1 TD</option><option>Carbopack B</option></select>
+      </div>
+      <div class="field"><label>Conditioning Date</label><input id="pConditioned" type="date"></div>
+      <div class="field"><label>Duplicate Location</label><select id="pDup"></select></div>
+      <div class="field"><label>Field Blank Location</label><select id="pBlank"></select></div>
+    </div>
+    <div class="section notice">Sample IDs are generated automatically from station, period, sample type and BNZ target code.</div>
+    <div class="section actions">
+      <button class="btn" onclick="savePeriod()">Create Period & Sample Plan</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="periodOpsDialog">
+  <div class="modal-head"><strong id="opsTitle">Period</strong><button class="x" onclick="periodOpsDialog.close()">×</button></div>
+  <div class="modal-body" id="opsBody"></div>
+</dialog>
+
+<dialog id="stationOpsDialog">
+  <div class="modal-head"><strong id="stationOpsTitle">Station</strong><button class="x" onclick="stationOpsDialog.close()">×</button></div>
+  <div class="modal-body" id="stationOpsBody"></div>
+</dialog>
+
+<dialog id="exceptionDialog">
+  <div class="modal-head"><strong>Record Exception</strong><button class="x" onclick="exceptionDialog.close()">×</button></div>
+  <div class="modal-body">
+    <input type="hidden" id="exPeriod"><input type="hidden" id="exStation">
+    <div class="form-grid">
+      <div class="field"><label>Category</label>
+        <select id="exCategory">
+          <option>Protective hood damaged</option><option>Mount damaged</option><option>Vegetation obstruction</option>
+          <option>Construction</option><option>Access issue</option><option>Possible interference source</option>
+          <option>Missing sampler</option><option>Loose cap</option><option>Damaged tube</option><option>Other</option>
+        </select>
+      </div>
+      <div class="field"><label>Status</label><select id="exStatus"><option value="OPEN">Open issue</option><option value="RESOLVED">Resolved in field</option></select></div>
+    </div>
+    <div class="section field"><label>Description / Immediate Action</label><textarea id="exNotes"></textarea></div>
+    <div class="section actions"><button class="btn warn" onclick="saveException()">Save Exception</button></div>
+  </div>
+</dialog>
+
+<script>
+const KEY='airQualityProAlpha01';
+let db = loadDB();
+let activePeriodId=null;
+let activeStationId=null;
+
+function emptyDB(){return {facilities:[],periods:[],exceptions:[],audit:[],settings:{tech:'Field Tech'}}}
+function loadDB(){try{return JSON.parse(localStorage.getItem(KEY))||emptyDB()}catch(e){return emptyDB()}}
+function saveDB(){localStorage.setItem(KEY,JSON.stringify(db)); renderAll()}
+function uid(prefix='id'){return prefix+'_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7)}
+function nowISO(){return new Date().toISOString()}
+function audit(action,details){db.audit.unshift({id:uid('aud'),at:nowISO(),action,details}); if(db.audit.length>500) db.audit.pop()}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function fmt(dt){if(!dt)return '—'; return new Date(dt).toLocaleString()}
+function daysBetween(a,b){return Math.round((new Date(b)-new Date(a))/86400000)}
+function nav(view){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+view).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===view));
+  renderAll();
+}
+
+function renderAll(){renderMetrics();renderFacilities();renderPeriods();renderIssues();renderHome();updatePeriodDialog()}
+function renderMetrics(){
+  const active=db.periods.filter(p=>!['RECOVERY_COMPLETE','COMPLETE_WITH_EXCEPTIONS'].includes(p.status));
+  const open=db.exceptions.filter(e=>e.status==='OPEN');
+  const sampleCount=db.periods.flatMap(p=>p.samples||[]).filter(s=>!['COMPLETE','LAB_RECEIVED'].includes(s.status)).length;
+  mJobs.textContent=active.length;mIssues.textContent=open.length;mFacilities.textContent=db.facilities.length;mSamples.textContent=sampleCount;
+}
+function renderHome(){
+  const el=document.getElementById('homeActive');
+  if(!db.periods.length){el.innerHTML='<div class="empty">No monitoring periods yet.</div>';return}
+  el.innerHTML=db.periods.slice().sort((a,b)=>new Date(a.deployDate)-new Date(b.deployDate)).map(p=>{
+    const f=db.facilities.find(x=>x.id===p.facilityId); const prog=periodProgress(p);
+    return `<div class="row" onclick="openPeriodOps('${p.id}')"><div class="main"><div class="title">${esc(f?.name||'Facility')} · ${esc(p.periodId)}</div>
+    <div class="sub">${esc(p.status.replaceAll('_',' '))} · ${prog.done}/${prog.total} stations</div></div>
+    <span class="status ${prog.done===prog.total?'s-ok':'s-info'}">${prog.done}/${prog.total}</span></div>`
+  }).join('');
+}
+function renderFacilities(){
+  const el=document.getElementById('facilityList');
+  if(!db.facilities.length){el.innerHTML='<div class="empty">Create a facility first.</div>';return}
+  el.innerHTML=db.facilities.map(f=>`<div class="card">
+    <div class="split"><div><div class="label">${esc(f.facilityId)}</div><h3>${esc(f.name)}</h3><div class="tiny">${esc(f.program)} · ${esc(f.target)}</div></div>
+    <button class="btn secondary" onclick="openStationDialog('${f.id}')">+ Location</button></div>
+    <div class="section"><div class="label">Monitoring Locations</div>
+      <div class="list" style="margin-top:8px">
+      ${(f.stations||[]).length ? f.stations.map(s=>`<div class="row"><div class="main"><div class="title">${esc(s.stationId)}</div><div class="sub">${esc(s.type)} · ${esc(s.hood)} · ${esc(s.height)} ft</div></div><button class="btn ghost" onclick="openStationDialog('${f.id}','${s.id}')">Edit</button></div>`).join(''):'<div class="empty">No locations yet.</div>'}
+      </div></div></div>`).join('');
+}
+function renderPeriods(){
+  const el=document.getElementById('periodList');
+  if(!db.periods.length){el.innerHTML='<div class="empty">No monitoring periods yet.</div>';return}
+  el.innerHTML=db.periods.map(p=>{
+    const f=db.facilities.find(x=>x.id===p.facilityId), prog=periodProgress(p);
+    return `<div class="row" onclick="openPeriodOps('${p.id}')">
+      <div class="main"><div class="title">${esc(f?.name||'Facility')} · ${esc(p.periodId)}</div>
+      <div class="sub">${esc(p.profile)} · Deploy ${esc(p.deployDate)} · Recover ${esc(p.recoverDate)}</div></div>
+      <span class="status ${statusClass(p.status)}">${esc(p.status.replaceAll('_',' '))}</span></div>`
+  }).join('');
+}
+function renderIssues(){
+  const el=document.getElementById('issueList');
+  if(!db.exceptions.length){el.innerHTML='<div class="empty">No exceptions recorded.</div>';return}
+  el.innerHTML=db.exceptions.slice().sort((a,b)=>b.at.localeCompare(a.at)).map(e=>{
+    const p=db.periods.find(x=>x.id===e.periodId), f=db.facilities.find(x=>x.id===p?.facilityId);
+    return `<div class="row"><div class="main"><div class="title">${esc(e.category)} · ${esc(e.stationId)}</div>
+      <div class="sub">${esc(f?.name||'')} ${esc(p?.periodId||'')} · ${fmt(e.at)}<br>${esc(e.notes||'')}</div></div>
+      <span class="status ${e.status==='OPEN'?'s-warn':'s-ok'}">${esc(e.status)}</span></div>`
+  }).join('');
+}
+function statusClass(s){
+  if(s.includes('COMPLETE') && !s.includes('EXCEPTIONS')) return 's-ok';
+  if(s.includes('EXCEPTIONS')) return 's-warn';
+  if(s.includes('RECOVERY')) return 's-info';
+  if(s.includes('DEPLOY')) return 's-info';
+  return 's-not';
+}
+
+function openFacilityDialog(){facilityDialog.showModal()}
+function saveFacility(){
+  const name=fName.value.trim(), facilityId=fId.value.trim();
+  if(!name||!facilityId) return alert('Facility name and ID are required.');
+  db.facilities.push({id:uid('fac'),name,facilityId,program:fProgram.value,target:fTarget.value,metStation:fMet.value.trim(),height:+fHeight.value||6.5,notes:fNotes.value.trim(),stations:[]});
+  audit('FACILITY_CREATED',`${facilityId} ${name}`); saveDB(); facilityDialog.close();
+  fName.value='';fId.value='';fMet.value='';fNotes.value='';
+}
+function openStationDialog(facilityId,stationEditId=''){
+  const f=db.facilities.find(x=>x.id===facilityId); if(!f)return;
+  stFacility.value=facilityId; stEditId.value=stationEditId;
+  const s=(f.stations||[]).find(x=>x.id===stationEditId);
+  stationTitle.textContent=s?'Edit Monitoring Location':'New Monitoring Location';
+  stId.value=s?.stationId||`ML-${String((f.stations||[]).length+1).padStart(2,'0')}`;
+  stHeight.value=s?.height||f.height||6.5; stLat.value=s?.lat||'';stLng.value=s?.lng||'';
+  stType.value=s?.type||'Permanent';stHood.value=s?.hood||'Installed';stNotes.value=s?.notes||'';
+  stationDialog.showModal();
+}
+function saveStation(){
+  const f=db.facilities.find(x=>x.id===stFacility.value); if(!f)return;
+  const stationId=stId.value.trim(); if(!stationId)return alert('Location ID required.');
+  let s=f.stations.find(x=>x.id===stEditId.value);
+  const data={stationId,height:+stHeight.value||0,lat:stLat.value.trim(),lng:stLng.value.trim(),type:stType.value,hood:stHood.value,notes:stNotes.value.trim()};
+  if(s){Object.assign(s,data);audit('STATION_UPDATED',`${f.facilityId} ${stationId}`)}
+  else{f.stations.push({id:uid('st'),...data});audit('STATION_CREATED',`${f.facilityId} ${stationId}`)}
+  saveDB();stationDialog.close();
+}
+
+function updatePeriodDialog(){
+  pFacility.innerHTML=db.facilities.map(f=>`<option value="${f.id}">${esc(f.name)}</option>`).join('');
+  updateStationSelectors();
+}
+pFacility.addEventListener('change',updateStationSelectors);
+function updateStationSelectors(){
+  const f=db.facilities.find(x=>x.id===pFacility.value)||db.facilities[0];
+  const opts=(f?.stations||[]).map(s=>`<option value="${s.id}">${esc(s.stationId)}</option>`).join('');
+  pDup.innerHTML='<option value="">None</option>'+opts;pBlank.innerHTML='<option value="">None</option>'+opts;
+}
+function openPeriodDialog(){
+  if(!db.facilities.length)return alert('Create a facility first.');
+  updatePeriodDialog();
+  pDeploy.value=new Date().toISOString().slice(0,10);
+  const d=new Date();d.setDate(d.getDate()+14);pRecover.value=d.toISOString().slice(0,10);
+  pConditioned.value=new Date().toISOString().slice(0,10);
+  periodDialog.showModal();
+}
+function slugPeriod(v){return (v||'P01').replace(/[^0-9A-Za-z]/g,'').toUpperCase()}
+function sampleId(stationId,periodId,type){
+  const seq=stationId.replace(/\D/g,'').padStart(2,'0')||'00';
+  const per=slugPeriod(periodId).replace(/\D/g,'').padStart(2,'0')||'00';
+  return `${seq}-${seq}-${per}-${type}-BNZ`;
+}
+function savePeriod(){
+  const f=db.facilities.find(x=>x.id===pFacility.value); if(!f)return;
+  if(!(f.stations||[]).length)return alert('Add monitoring locations to the facility first.');
+  const pid=pId.value.trim(); if(!pid)return alert('Period ID required.');
+  const profile=pProfile.value;
+  let dupId=pDup.value, blankId=pBlank.value;
+  if(profile==='ALT122' && (!dupId||!blankId)) return alert('ALT-122 training profile requires a duplicate location and a field blank location in this Alpha workflow.');
+  const samples=[];
+  f.stations.forEach(s=>samples.push({id:uid('sam'),stationId:s.id,sampleId:sampleId(s.stationId,pid,'SA'),type:'SA',tubeId:'',conditioned:pConditioned.value,status:'ASSIGNED',deploy:null,recover:null,condition:'NORMAL'}));
+  if(dupId){const st=f.stations.find(s=>s.id===dupId);samples.push({id:uid('sam'),stationId:dupId,sampleId:sampleId(st.stationId,pid,'DU'),type:'DU',tubeId:'',conditioned:pConditioned.value,status:'ASSIGNED',deploy:null,recover:null,condition:'NORMAL'})}
+  if(blankId){const st=f.stations.find(s=>s.id===blankId);samples.push({id:uid('sam'),stationId:blankId,sampleId:sampleId(st.stationId,pid,'FB'),type:'FB',tubeId:'',conditioned:pConditioned.value,status:'ASSIGNED',deploy:null,recover:null,condition:'NORMAL'})}
+  db.periods.push({id:uid('per'),facilityId:f.id,periodId:pid,deployDate:pDeploy.value,recoverDate:pRecover.value,profile,sorbent:pSorbent.value,conditioned:pConditioned.value,duplicateStation:dupId,blankStation:blankId,status:'PLANNED',samples,metVerified:false,closedDeploy:false,closedRecover:false});
+  audit('PERIOD_CREATED',`${f.facilityId} ${pid}`);saveDB();periodDialog.close();nav('field');
+}
+
+function periodProgress(p){
+  const f=db.facilities.find(x=>x.id===p.facilityId); const stations=f?.stations||[];
+  let done=0;
+  stations.forEach(s=>{
+    const ss=p.samples.filter(x=>x.stationId===s.id && x.type!=='FB');
+    const target = p.status.includes('RECOVERY') || p.closedDeploy ? ss.every(x=>['RECOVERED','MISSING'].includes(x.status)) : ss.every(x=>x.status==='DEPLOYED');
+    if(target)done++;
+  });
+  return {done,total:stations.length};
+}
+function openPeriodOps(pid){
+  activePeriodId=pid; const p=db.periods.find(x=>x.id===pid), f=db.facilities.find(x=>x.id===p.facilityId); if(!p||!f)return;
+  opsTitle.textContent=`${f.name} · ${p.periodId}`;
+  const deployed=p.samples.filter(s=>s.status==='DEPLOYED').length, recovered=p.samples.filter(s=>s.status==='RECOVERED').length, missing=p.samples.filter(s=>s.status==='MISSING').length;
+  const stationRows=(f.stations||[]).map(s=>{
+    const ss=p.samples.filter(x=>x.stationId===s.id);
+    const amb=ss.filter(x=>x.type!=='FB');
+    let st='Not started', cls='s-not';
+    if(p.closedDeploy){
+      if(amb.every(x=>['RECOVERED','MISSING'].includes(x.status))){st=amb.some(x=>x.status==='MISSING')?'Exception':'Recovered';cls=amb.some(x=>x.status==='MISSING')?'s-warn':'s-ok'}
+      else if(amb.some(x=>x.status==='RECOVERED')){st='Partial recovery';cls='s-warn'}
+      else {st='Ready recovery';cls='s-info'}
+    } else {
+      if(amb.every(x=>x.status==='DEPLOYED')){st='Deployed';cls='s-ok'}
+      else if(amb.some(x=>x.status==='DEPLOYED')){st='Partial';cls='s-warn'}
+    }
+    return `<div class="row" onclick="openStationOps('${s.id}')"><div class="main"><div class="title">${esc(s.stationId)} ${ss.some(x=>x.type==='DU')?'· DU':''} ${ss.some(x=>x.type==='FB')?'· FB':''}</div>
+      <div class="sub">${ss.map(x=>`${x.type}: ${x.status}`).join(' · ')}</div></div><span class="status ${cls}">${st}</span></div>`
+  }).join('');
+  const issueCount=db.exceptions.filter(e=>e.periodId===p.id && e.status==='OPEN').length;
+  opsBody.innerHTML=`
+    <div class="grid">
+      <div class="kpi"><div class="label">Deployed</div><div class="big-num">${deployed}</div></div>
+      <div class="kpi"><div class="label">Recovered</div><div class="big-num">${recovered}</div></div>
+      <div class="kpi"><div class="label">Missing</div><div class="big-num">${missing}</div></div>
+      <div class="kpi"><div class="label">Open Issues</div><div class="big-num">${issueCount}</div></div>
+    </div>
+    <div class="section actions">
+      <button class="btn secondary" onclick="toggleMet('${p.id}')">${p.metVerified?'✓ Met Verified':'Verify Met Station'}</button>
+      ${!p.closedDeploy?`<button class="btn ok" onclick="closeDeployment('${p.id}')">Close Deployment</button>`:''}
+      ${p.closedDeploy&&!p.closedRecover?`<button class="btn warn" onclick="closeRecovery('${p.id}')">Close Recovery</button>`:''}
+    </div>
+    <h3 class="section">Stations</h3>
+    <div class="list">${stationRows}</div>
+    <h3 class="section">Sample Manifest</h3>
+    <div class="list">${p.samples.map(s=>`<div class="row"><div class="main"><div class="title">${esc(s.sampleId)}</div><div class="sub">${s.type} · Tube ${esc(s.tubeId||'not scanned')} · ${s.status}</div></div><span class="status ${statusClass(s.status)}">${s.type}</span></div>`).join('')}</div>
+  `;
+  periodOpsDialog.showModal();
+}
+function toggleMet(pid){const p=db.periods.find(x=>x.id===pid);p.metVerified=!p.metVerified;audit('MET_VERIFICATION',`${p.periodId}: ${p.metVerified}`);saveDB();openPeriodOps(pid)}
+
+function openStationOps(stationId){
+  activeStationId=stationId;
+  const p=db.periods.find(x=>x.id===activePeriodId), f=db.facilities.find(x=>x.id===p.facilityId), s=f.stations.find(x=>x.id===stationId);
+  const samples=p.samples.filter(x=>x.stationId===stationId);
+  stationOpsTitle.textContent=`${s.stationId} · ${p.closedDeploy?'Recovery':'Deployment'}`;
+  const openIssue=db.exceptions.filter(e=>e.periodId===p.id&&e.stationId===s.stationId&&e.status==='OPEN').length;
+  const sampleCards=samples.map(sm=>{
+    const isDeploy=!p.closedDeploy;
+    const btn = isDeploy
+      ? (sm.status==='DEPLOYED'?'<span class="status s-ok">Deployed</span>':`<button class="btn ${sm.type==='FB'?'warn':'ok'}" onclick="deploySample('${sm.id}')">${sm.type==='FB'?'Place Field Blank':'Deploy Sample'}</button>`)
+      : (sm.type==='FB'
+          ? (sm.status==='RECOVERED'?'<span class="status s-ok">Recovered</span>':`<button class="btn ok" onclick="recoverSample('${sm.id}')">Recover Blank</button>`)
+          : (sm.status==='RECOVERED'?'<span class="status s-ok">Recovered</span>':sm.status==='MISSING'?'<span class="status s-bad">Missing</span>':`<div class="actions"><button class="btn ok" onclick="recoverSample('${sm.id}')">Recover</button><button class="btn bad" onclick="markMissing('${sm.id}')">Missing</button></div>`));
+    return `<div class="card"><div class="label">${sm.type==='SA'?'Ambient':sm.type==='DU'?'Duplicate':'Field Blank'}</div>
+      <h3>${esc(sm.sampleId)}</h3>
+      <div class="tiny">Tube ID: ${esc(sm.tubeId||'not assigned')} · Conditioned ${esc(sm.conditioned||'—')}</div>
+      ${sm.type==='FB'?'<div class="notice warn section"><strong>FIELD BLANK:</strong> keep storage closures in place. Do not expose as an ambient sample.</div>':''}
+      <div class="section">${btn}</div></div>`;
+  }).join('');
+  stationOpsBody.innerHTML=`
+    <div class="notice ${openIssue?'warn':'ok'}">${openIssue?openIssue+' open issue(s) at this station.':'No open station issues.'}</div>
+    <div class="section card">
+      <div class="label">Station Reference</div>
+      <div class="tiny">Height ${esc(s.height)} ft · Hood ${esc(s.hood)} · GPS ${esc(s.lat||'—')}, ${esc(s.lng||'—')}</div>
+      <div class="section actions"><button class="btn secondary" onclick="captureGPS('ops')">Capture Current GPS</button><button class="btn warn" onclick="openException()">Record Exception</button></div>
+    </div>
+    <div class="section">${sampleCards}</div>`;
+  stationOpsDialog.showModal();
+}
+
+function promptTube(sm){
+  let id=prompt(`Scan/enter tube ID for ${sm.sampleId}`,sm.tubeId||'');
+  if(id===null)return null;
+  id=id.trim(); if(!id){alert('Tube ID required.');return null}
+  const prior=sm.tubeId;
+  if(prior && prior!==id){
+    const reason=prompt(`Changing tube ID from ${prior} to ${id}. Enter correction reason:`,'Transcription correction');
+    if(!reason)return null;
+    audit('TUBE_ID_CORRECTED',`${sm.sampleId}: ${prior} -> ${id}. Reason: ${reason}`);
+  }
+  sm.tubeId=id; return id;
+}
+function validateMediaAge(sm){
+  if(!sm.conditioned)return true;
+  const age=daysBetween(sm.conditioned,new Date().toISOString().slice(0,10));
+  if(age>30) return confirm(`WARNING: This tube was conditioned ${age} days ago (>30 days). Continue only if reviewed?`);
+  return true;
+}
+function deploySample(sampleUid){
+  const p=db.periods.find(x=>x.id===activePeriodId), sm=p.samples.find(x=>x.id===sampleUid);
+  if(!promptTube(sm))return;if(!validateMediaAge(sm))return;
+  if(sm.type==='FB'){
+    if(!confirm('FIELD BLANK: Confirm storage closures remain in place and blank is NOT exposed.'))return;
+    sm.status='DEPLOYED';sm.deploy={at:nowISO(),gps:lastGPS||null,blank:true};
+  } else {
+    const ok=confirm('Confirm: tube intact, caps secure, sorbent appears OK, diffusion cap installed, vertical orientation, sampling end down, under protective hood.');
+    if(!ok)return;
+    sm.status='DEPLOYED';sm.deploy={at:nowISO(),gps:lastGPS||null};
+  }
+  audit('SAMPLE_DEPLOYED',`${sm.sampleId} tube ${sm.tubeId}`);saveDB();openStationOps(activeStationId);
+}
+function recoverSample(sampleUid){
+  const p=db.periods.find(x=>x.id===activePeriodId), sm=p.samples.find(x=>x.id===sampleUid);
+  if(!sm.tubeId){if(!promptTube(sm))return}else{
+    const scanned=prompt(`Scan/enter tube ID. Expected ${sm.tubeId}`,sm.tubeId);
+    if(scanned===null)return;
+    if(scanned.trim()!==sm.tubeId){alert(`SAMPLE MISMATCH\nScanned: ${scanned.trim()}\nExpected: ${sm.tubeId}`);return}
+  }
+  if(sm.type!=='FB' && !confirm('Confirm sampler present, condition checked, diffusion cap removed, storage cap installed and secured.'))return;
+  sm.status='RECOVERED';sm.recover={at:nowISO(),gps:lastGPS||null};
+  audit('SAMPLE_RECOVERED',`${sm.sampleId} tube ${sm.tubeId}`);saveDB();openStationOps(activeStationId);
+}
+function markMissing(sampleUid){
+  const p=db.periods.find(x=>x.id===activePeriodId), sm=p.samples.find(x=>x.id===sampleUid);
+  if(!confirm(`Mark ${sm.sampleId} as MISSING / NOT RECOVERED? No recovery time will be created.`))return;
+  sm.status='MISSING';sm.recover=null;
+  const f=db.facilities.find(x=>x.id===p.facilityId), st=f.stations.find(x=>x.id===sm.stationId);
+  db.exceptions.push({id:uid('ex'),periodId:p.id,stationId:st.stationId,category:'Missing sampler',status:'OPEN',notes:'Expected sample not recovered.',at:nowISO()});
+  audit('SAMPLE_MISSING',`${sm.sampleId}`);saveDB();openStationOps(activeStationId);
+}
+function closeDeployment(pid){
+  const p=db.periods.find(x=>x.id===pid);
+  const not=p.samples.filter(s=>s.status!=='DEPLOYED');
+  if(not.length)return alert('Cannot close deployment.\nSamples not accounted for:\n'+not.map(s=>s.sampleId+' ('+s.status+')').join('\n'));
+  if(!p.metVerified && !confirm('Met station has not been verified. Close deployment anyway with this documented gap?'))return;
+  p.closedDeploy=true;p.status='RECOVERY_READY';audit('DEPLOYMENT_CLOSED',p.periodId);saveDB();openPeriodOps(pid);
+}
+function closeRecovery(pid){
+  const p=db.periods.find(x=>x.id===pid);
+  const unaccounted=p.samples.filter(s=>!['RECOVERED','MISSING'].includes(s.status));
+  if(unaccounted.length)return alert('Cannot close recovery. Unaccounted samples:\n'+unaccounted.map(s=>s.sampleId+' ('+s.status+')').join('\n'));
+  p.closedRecover=true;
+  const hasExceptions=p.samples.some(s=>s.status==='MISSING')||db.exceptions.some(e=>e.periodId===p.id&&e.status==='OPEN');
+  p.status=hasExceptions?'COMPLETE_WITH_EXCEPTIONS':'RECOVERY_COMPLETE';
+  audit('RECOVERY_CLOSED',`${p.periodId} ${p.status}`);saveDB();openPeriodOps(pid);
+}
+function openException(){
+  const p=db.periods.find(x=>x.id===activePeriodId), f=db.facilities.find(x=>x.id===p.facilityId), st=f.stations.find(x=>x.id===activeStationId);
+  exPeriod.value=p.id;exStation.value=st.stationId;exNotes.value='';exceptionDialog.showModal();
+}
+function saveException(){
+  db.exceptions.push({id:uid('ex'),periodId:exPeriod.value,stationId:exStation.value,category:exCategory.value,status:exStatus.value,notes:exNotes.value.trim(),at:nowISO()});
+  audit('EXCEPTION_RECORDED',`${exStation.value}: ${exCategory.value} (${exStatus.value})`);
+  saveDB();exceptionDialog.close();openStationOps(activeStationId);
+}
+
+let lastGPS=null;
+function captureGPS(mode){
+  if(!navigator.geolocation)return alert('Geolocation is not supported on this device/browser.');
+  navigator.geolocation.getCurrentPosition(pos=>{
+    lastGPS={lat:pos.coords.latitude,lng:pos.coords.longitude,accuracy:pos.coords.accuracy,at:nowISO()};
+    if(mode==='station'){stLat.value=lastGPS.lat.toFixed(6);stLng.value=lastGPS.lng.toFixed(6)}
+    alert(`GPS captured\n${lastGPS.lat.toFixed(6)}, ${lastGPS.lng.toFixed(6)}\nAccuracy ±${Math.round(lastGPS.accuracy)} m`);
+  },err=>alert('GPS error: '+err.message),{enableHighAccuracy:true,timeout:12000,maximumAge:0});
+}
+
+function exportData(){
+  const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}), a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download='Air_Quality_Pro_Backup_'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(a.href);
+}
+function importData(e){
+  const file=e.target.files[0];if(!file)return;
+  const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!x.facilities||!x.periods)throw Error('Invalid backup');db=x;saveDB();alert('Backup imported.')}catch(err){alert('Import failed: '+err.message)}};r.readAsText(file);
+}
+function resetAll(){if(confirm('Delete ALL Air Quality Pro local data on this device?')){db=emptyDB();saveDB()}}
+function loadDemo(){
+  if(db.facilities.length && !confirm('Demo data will be added to existing data. Continue?'))return;
+  const fid=uid('fac');
+  const stations=Array.from({length:12},(_,i)=>({id:uid('st'),stationId:`ML-${String(i+1).padStart(2,'0')}`,height:6.5,lat:'',lng:'',type:'Permanent',hood:'Installed',notes:i===3?'North perimeter service road':''}));
+  db.facilities.push({id:fid,name:'Bayou Refining Complex',facilityId:'BRC-001',program:'EPA Method 325A/325B',target:'Benzene',metStation:'MET-01',height:6.5,notes:'Fictional training facility',stations});
+  const pid='P08',conditioned=new Date().toISOString().slice(0,10),samples=[];
+  stations.forEach(s=>samples.push({id:uid('sam'),stationId:s.id,sampleId:sampleId(s.stationId,pid,'SA'),type:'SA',tubeId:'',conditioned,status:'ASSIGNED',deploy:null,recover:null,condition:'NORMAL'}));
+  samples.push({id:uid('sam'),stationId:stations[5].id,sampleId:sampleId(stations[5].stationId,pid,'DU'),type:'DU',tubeId:'',conditioned,status:'ASSIGNED',deploy:null,recover:null,condition:'NORMAL'});
+  samples.push({id:uid('sam'),stationId:stations[9].id,sampleId:sampleId(stations[9].stationId,pid,'FB'),type:'FB',tubeId:'',conditioned,status:'ASSIGNED',deploy:null,recover:null,condition:'NORMAL'});
+  const d=new Date(), r=new Date();r.setDate(r.getDate()+14);
+  db.periods.push({id:uid('per'),facilityId:fid,periodId:pid,deployDate:d.toISOString().slice(0,10),recoverDate:r.toISOString().slice(0,10),profile:'ALT122',sorbent:'Carbopack X',conditioned,duplicateStation:stations[5].id,blankStation:stations[9].id,status:'PLANNED',samples,metVerified:false,closedDeploy:false,closedRecover:false});
+  audit('DEMO_LOADED','Bayou Refining Complex P08');saveDB();nav('field');
+}
+window.addEventListener('online',()=>offlinePill.textContent='Online');
+window.addEventListener('offline',()=>offlinePill.textContent='Offline-ready');
+offlinePill.textContent=navigator.onLine?'Online':'Offline-ready';
+
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}))}
+renderAll();
+</script>
+</body>
+</html>
