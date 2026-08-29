@@ -37,7 +37,8 @@ a{color:inherit}
 .card{background:linear-gradient(180deg,var(--panel),#091620);border:1px solid #173443;border-radius:var(--radius);padding:16px;box-shadow:0 7px 24px rgba(0,0,0,.12);margin-top:12px}.card h3{font-size:15px;margin:0 0 4px}.card p.sub{color:var(--muted);font-size:12px;margin:0 0 12px;line-height:1.4}
 .section-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:20px 2px 8px}.section-title h2{font-size:16px;margin:0}.section-title small{color:var(--muted)}
 .workflow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.flowbtn{min-height:108px;text-align:left;border:1px solid #1c4452;border-radius:17px;background:#0d1e29;color:var(--text);padding:13px;transition:.12s transform,.12s border-color,.12s background}.flowbtn:active{transform:scale(.975);background:#12303a}.flowbtn .num{width:26px;height:26px;border-radius:9px;background:#133b3c;color:var(--accent2);display:grid;place-items:center;font-size:11px;font-weight:900;margin-bottom:12px}.flowbtn b{display:block;font-size:13px}.flowbtn span{display:block;font-size:10px;color:var(--muted);margin-top:4px;line-height:1.35}
-.btnrow{display:flex;flex-wrap:wrap;gap:8px}.btn{appearance:none;border:1px solid #25505c;border-radius:12px;padding:10px 13px;color:var(--text);background:#10242e;font-weight:760;font-size:12px;transition:.12s transform,.12s filter}.btn:active{transform:scale(.97);filter:brightness(1.2)}.btn.primary{background:linear-gradient(180deg,#26ceb0,#19aa91);color:#03120f;border-color:#40e0c2}.btn.blue{background:#153f5f;border-color:#246c9f}.btn.warn{background:#5a4313;border-color:#8f6d24}.btn.danger{background:#471a24;border-color:#7f3040}.btn.ghost{background:transparent}.btn.full{width:100%;justify-content:center}.btn.mini{padding:6px 9px;border-radius:9px;font-size:10px}
+.btnrow{display:flex;flex-wrap:wrap;gap:8px}.btn{appearance:none;border:1px solid #25505c;border-radius:12px;padding:10px 13px;color:var(--text);background:#10242e;font-weight:760;font-size:12px;transition:.12s transform,.12s filter}
+.screen-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:18px 0 4px}.screen-nav .btn{min-height:46px;font-size:12px}.screen-nav .btn:only-child{grid-column:1/-1}.screen-nav .nav-back{text-align:left}.screen-nav .nav-next{text-align:right}.screen-nav .nav-home{text-align:center}.btn:active{transform:scale(.97);filter:brightness(1.2)}.btn.primary{background:linear-gradient(180deg,#26ceb0,#19aa91);color:#03120f;border-color:#40e0c2}.btn.blue{background:#153f5f;border-color:#246c9f}.btn.warn{background:#5a4313;border-color:#8f6d24}.btn.danger{background:#471a24;border-color:#7f3040}.btn.ghost{background:transparent}.btn.full{width:100%;justify-content:center}.btn.mini{padding:6px 9px;border-radius:9px;font-size:10px}
 .formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}label{font-size:11px;color:#9fb5c0;font-weight:700}input,select,textarea{width:100%;margin-top:5px;border:1px solid #214150;border-radius:11px;background:#07151d;color:var(--text);padding:10px 11px;outline:none}input:focus,select:focus,textarea:focus{border-color:#34a994;box-shadow:0 0 0 3px rgba(37,208,177,.08)}textarea{resize:vertical;min-height:86px}.inline{display:flex;gap:8px;align-items:flex-end}.inline>*{flex:1}.check{display:flex;align-items:center;gap:8px;padding:10px;border:1px solid #173541;background:#0a1922;border-radius:11px;color:#c6d6dd;font-size:11px}.check input{width:auto;margin:0;accent-color:var(--accent)}
 .list{display:flex;flex-direction:column;gap:8px}.item{border:1px solid #183744;background:#0a1922;border-radius:14px;padding:12px;display:flex;justify-content:space-between;align-items:center;gap:10px}.item .main{min-width:0}.item b{display:block;font-size:12px}.item .meta{font-size:10px;color:var(--muted);margin-top:4px;line-height:1.35}.item .actions{display:flex;gap:5px;flex-shrink:0}.pill{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:999px;font-size:9px;font-weight:850;border:1px solid #28505f;background:#10242d;color:#c6d8df}.pill.good{color:#84efad;border-color:#246b46;background:#0c2a1b}.pill.warn{color:#ffe18a;border-color:#6b5928;background:#2c250e}.pill.bad{color:#ff9aa8;border-color:#743443;background:#30141a}.pill.info{color:#95cdf8;border-color:#315e80;background:#11293c}
 .alert{border-left:3px solid var(--warn);background:#211c0c;border-radius:10px;padding:10px 11px;margin:7px 0;font-size:11px;color:#e9ddb7}.alert.bad{border-color:var(--bad);background:#251016;color:#f3c1c9}.alert.good{border-color:var(--good);background:#0c2116;color:#b7e7c9}.empty{padding:25px 14px;text-align:center;border:1px dashed #254452;border-radius:14px;color:#78929f;font-size:11px}.progress{height:8px;border-radius:999px;background:#08131a;overflow:hidden;border:1px solid #19313d}.progress span{display:block;height:100%;background:linear-gradient(90deg,#1fb89c,#45e6ca)}
@@ -70,12 +71,14 @@ hr{border:0;border-top:1px solid #17323e;margin:14px 0}.muted{color:var(--muted)
   </div>
   <div class="card"><h3>Readiness & QA</h3><p class="sub">Live checks based on the active job and monitoring round.</p><div id="qaAlerts"><div class="empty">Create or select a job to activate QA checks.</div></div></div>
   <div class="card"><h3>Quick actions</h3><p class="sub">Built for a tech standing at the monitoring point—not somebody sitting behind a desk.</p><div class="btnrow"><button class="btn primary" id="quickDeploy">Deploy sampler</button><button class="btn blue" id="quickRecover">Recover sampler</button><button class="btn" id="quickLocation">Add location</button><button class="btn" id="quickNote">Field note / photo</button></div></div>
+  <div class="screen-nav no-print"><button class="btn primary nav-next" data-go="jobs">Next: Job setup →</button></div>
 </section>
 
 <section id="page-jobs" class="page">
   <div class="section-title"><h2>Jobs & monitoring rounds</h2><button class="btn primary" id="newJobBtn">+ New job</button></div>
   <div id="jobsList" class="list"></div>
   <div id="activeJobPanel" class="card" style="display:none"><div class="kicker">Active Job</div><h3 id="jobPanelTitle"></h3><p class="sub" id="jobPanelMeta"></p><div class="grid g3"><div class="stat"><div class="n" id="jobRoundCount">0</div><div class="k">Rounds</div></div><div class="stat"><div class="n" id="jobLocationCount">0</div><div class="k">Locations</div></div><div class="stat"><div class="n" id="jobSampleCount">0</div><div class="k">Sample records</div></div></div><hr><div class="btnrow"><button class="btn primary" id="newRoundBtn">+ Start monitoring round</button><button class="btn" id="editJobBtn">Edit job</button><button class="btn danger" id="deleteJobBtn">Delete job</button></div><div id="roundsList" class="list" style="margin-top:12px"></div></div>
+  <div class="screen-nav no-print"><button class="btn nav-back" data-go="home">← Back: Dashboard</button><button class="btn primary nav-next" data-go="site">Next: Site & locations →</button></div>
 </section>
 
 <section id="page-site" class="page">
@@ -86,6 +89,7 @@ hr{border:0;border-top:1px solid #17323e;margin:14px 0}.muted{color:var(--muted)
     <div class="card"><h3>Meteorological station</h3><p class="sub">Track the station supplying wind, temperature and pressure data for the monitoring period.</p><div class="formgrid"><label>Station ID / name<input id="metName" placeholder="MET-01"></label><label>Data source<select id="metSource"><option>On-site station</option><option>Near-site station</option><option>Regulatory station</option><option>Regional data (non-regulatory use)</option></select></label><label>Latitude<input id="metLat" inputmode="decimal" placeholder="30.000000"></label><label>Longitude<input id="metLon" inputmode="decimal" placeholder="-90.000000"></label><label>Logger / file reference<input id="metFile" placeholder="Logger name, filename or data system"></label><label>Field status<select id="metStatus"><option value="ready">Ready / logging</option><option value="pending">Pending verification</option><option value="issue">Issue / data gap</option></select></label></div><div class="grid g4" style="margin:10px 0"><label class="check"><input type="checkbox" id="metWindSpeed">Wind speed</label><label class="check"><input type="checkbox" id="metWindDir">Wind direction</label><label class="check"><input type="checkbox" id="metTemp">Temperature</label><label class="check"><input type="checkbox" id="metPressure">Barometric pressure</label></div><div class="btnrow"><button class="btn" id="metGpsBtn">Use current GPS</button><button class="btn primary" id="saveMetBtn">Save met station</button></div></div>
     <div class="card"><h3>Monitoring locations</h3><p class="sub">Use permanent location IDs so sample records, photos, issues and results stay tied to the same point round after round.</p><div id="locationsList" class="list"></div></div>
   </div>
+  <div class="screen-nav no-print"><button class="btn nav-back" data-go="jobs">← Back: Job setup</button><button class="btn primary nav-next" data-go="field">Next: Field operations →</button></div>
 </section>
 
 <section id="page-field" class="page">
@@ -133,12 +137,14 @@ hr{border:0;border-top:1px solid #17323e;margin:14px 0}.muted{color:var(--muted)
       <div class="card"><h3>Round notes</h3><div id="notesList" class="list"></div></div>
     </div>
   </div>
+  <div class="screen-nav no-print"><button class="btn nav-back" data-go="site">← Back: Site & locations</button><button class="btn primary nav-next" data-go="samples">Next: Sample tracker →</button></div>
 </section>
 
 <section id="page-samples" class="page">
   <div class="section-title"><h2>Sample tracker</h2><button class="btn" id="exportSamplesBtn">Export CSV</button></div>
   <div class="card"><div class="formgrid"><label>Filter by status<select id="sampleFilter"><option value="all">All samples</option><option value="deployed">Deployed</option><option value="recovered">Recovered</option><option value="shipped">Shipped</option><option value="received">Received by lab</option></select></label><label>Search<input id="sampleSearch" placeholder="Tube ID or location"></label></div></div>
   <div class="card"><div id="samplesTable"></div></div>
+  <div class="screen-nav no-print"><button class="btn nav-back" data-go="field">← Back: Field operations</button><button class="btn primary nav-next" data-go="custody">Next: Custody & report →</button></div>
 </section>
 
 <section id="page-custody" class="page printable">
@@ -151,6 +157,7 @@ hr{border:0;border-top:1px solid #17323e;margin:14px 0}.muted{color:var(--muted)
     <div class="card"><h3>Site / meteorological record</h3><div id="reportSiteMet" class="small"></div></div>
     <div class="card"><h3>Field notes & deviations</h3><div id="reportNotes" class="list"></div></div>
   </div>
+  <div class="screen-nav no-print"><button class="btn nav-back" data-go="samples">← Back: Sample tracker</button><button class="btn primary nav-next" data-go="more">Next: More tools →</button></div>
 </section>
 
 <section id="page-more" class="page">
@@ -167,6 +174,7 @@ hr{border:0;border-top:1px solid #17323e;margin:14px 0}.muted{color:var(--muted)
   </div>
   <div class="card"><h3>Data & backup</h3><p class="sub">All working data is stored locally on this device/browser. Export backups before clearing browser data or moving devices.</p><div class="btnrow"><button class="btn primary" id="backupBtn">Export backup</button><label class="btn" style="display:inline-block">Import backup<input id="restoreFile" type="file" accept="application/json" style="display:none"></label><button class="btn warn" id="demoBtn">Load demo job</button><button class="btn danger" id="clearAllBtn">Clear all app data</button></div></div>
   <div class="card"><h3>Method reference guardrail</h3><p class="sub">Air Quality Pro is a field workflow and recordkeeping aid. The applicable regulation, permit, approved monitoring plan and current EPA method remain controlling. The built-in checks are designed to catch common misses—not replace project-specific QA review.</p></div>
+  <div class="screen-nav no-print"><button class="btn nav-back" data-go="custody">← Back: Custody & report</button><button class="btn primary nav-home" data-go="home">Dashboard</button></div>
 </section>
 </main>
 
@@ -182,6 +190,7 @@ hr{border:0;border-top:1px solid #17323e;margin:14px 0}.muted{color:var(--muted)
 
 <script>
 (() => {
+// Build v0.3 — screen navigation added. Keep the storage key unchanged so existing jobs remain available.
 const KEY='airQualityPro_v02';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const uid=p=>(p||'id')+'_'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
