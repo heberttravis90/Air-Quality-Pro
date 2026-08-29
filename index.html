@@ -4,10 +4,13 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <meta name="theme-color" content="#07131b" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <title>Air Quality Pro</title>
-<link rel="manifest" href="manifest.json" />
+<link rel="manifest" href="manifest.json?v=08" />
 <style>
 :root{
   --bg:#061018;--panel:#0b1822;--panel2:#0f202b;--panel3:#122734;
@@ -52,11 +55,22 @@ a{color:inherit}
 hr{border:0;border-top:1px solid #17323e;margin:14px 0}.muted{color:var(--muted)}.small{font-size:10px}.right{text-align:right}
 @media(max-width:760px){.wrap{padding:12px}.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(2,1fr)}.workflow{grid-template-columns:repeat(2,1fr)}.modulegrid{grid-template-columns:repeat(2,1fr)}.formgrid{grid-template-columns:1fr}.hero h2{font-size:21px}.jobchip{max-width:38vw}.item{align-items:flex-start}.item .actions{flex-direction:column}}
 @media(max-width:430px){.g3{grid-template-columns:1fr}.modulegrid{grid-template-columns:1fr}.brand h1{font-size:16px}.logo{width:38px;height:38px}.jobchip{font-size:10px}}
+
+/* v0.8 consistency + customization */
+.page > .section-title:first-child{min-height:54px;margin-top:2px;padding:11px 12px;border:1px solid var(--line);border-radius:15px;background:linear-gradient(180deg,var(--panel2),var(--panel));box-shadow:0 7px 22px rgba(0,0,0,.10)}
+.page > .section-title:first-child h2{font-size:17px}.page > .section-title:first-child small{line-height:1.35;text-align:right}
+.settings-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.setting-choice{position:relative;border:1px solid var(--line);border-radius:15px;background:var(--panel2);padding:13px;text-align:left;color:var(--text);min-height:82px}.setting-choice b{display:block;font-size:12px}.setting-choice span{display:block;margin-top:5px;color:var(--muted);font-size:10px;line-height:1.35}.setting-choice.active{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 22%,transparent)}
+.accent-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.accent-choice{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:13px;padding:11px 10px;display:flex;align-items:center;gap:9px;font-size:11px;font-weight:800}.accent-choice.active{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 20%,transparent)}.accent-dot{width:18px;height:18px;border-radius:50%;background:var(--swatch);box-shadow:0 0 0 3px color-mix(in srgb,var(--swatch) 16%,transparent);flex:0 0 auto}.custom-color-row{display:flex;gap:10px;align-items:center}.custom-color-row input[type=color]{width:58px;height:44px;padding:4px;border-radius:12px;flex:0 0 auto}.preview-strip{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.settings-note{font-size:10px;color:var(--muted);line-height:1.45;margin-top:8px}
+.logo svg path{stroke:var(--accent2)!important}.eyebrow,.kicker{color:var(--accent2)}.hero:after{background:radial-gradient(circle,color-mix(in srgb,var(--accent) 18%,transparent),transparent 70%)}input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 10%,transparent)}.progress span{background:linear-gradient(90deg,var(--accent),var(--accent2))}.module.active{border-color:color-mix(in srgb,var(--accent) 60%,#25505c);background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 15%,#0a1922),#0a1922)}
+body[data-theme="light"]{--bg:#eef4f6;--panel:#ffffff;--panel2:#f6fafb;--panel3:#e9f1f4;--line:#c9d7dd;--text:#12252f;--muted:#627984;--shadow:0 16px 36px rgba(30,55,68,.12);background:linear-gradient(180deg,#eef4f6 0%,#f7fafb 100%);color:var(--text)}
+body[data-theme="light"] .topbar{background:rgba(247,250,251,.96);border-bottom-color:#d5e0e4}body[data-theme="light"] .jobchip{background:#fff;border-color:#c9d7dd;color:#415b66}body[data-theme="light"] .logo{background:radial-gradient(circle at 30% 20%,color-mix(in srgb,var(--accent) 18%,white),#f7fafb 68%);border-color:color-mix(in srgb,var(--accent) 45%,#c9d7dd)}body[data-theme="light"] .hero{background:linear-gradient(135deg,#ffffff,#edf5f7 72%);border-color:#cbdade}body[data-theme="light"] .hero p{color:#58717c}body[data-theme="light"] .stat,body[data-theme="light"] .card{background:linear-gradient(180deg,#fff,#f8fbfc);border-color:#cfdde2}body[data-theme="light"] .flowbtn,body[data-theme="light"] .btn,body[data-theme="light"] input,body[data-theme="light"] select,body[data-theme="light"] textarea,body[data-theme="light"] .check,body[data-theme="light"] .item,body[data-theme="light"] .tab,body[data-theme="light"] .module,body[data-theme="light"] .setting-choice,body[data-theme="light"] .accent-choice{background:#fff;border-color:#cad9df;color:var(--text)}body[data-theme="light"] .flowbtn:active{background:#eaf4f5}body[data-theme="light"] .flowbtn .num{background:color-mix(in srgb,var(--accent) 15%,white);color:color-mix(in srgb,var(--accent) 80%,#12252f)}body[data-theme="light"] .btn.ghost{background:transparent}body[data-theme="light"] .btn.blue{background:#eaf5ff;border-color:#a8cfea}body[data-theme="light"] .btn.warn{background:#fff8df;border-color:#dfc66c}body[data-theme="light"] .btn.danger{background:#fff0f2;border-color:#df9ba6}body[data-theme="light"] .empty{border-color:#c7d7dd;color:#70858e}body[data-theme="light"] .bottomnav{background:rgba(250,252,253,.98);border-top-color:#d1dde1}body[data-theme="light"] .navbtn{color:#758993}body[data-theme="light"] .navbtn.active{background:color-mix(in srgb,var(--accent) 11%,white);color:color-mix(in srgb,var(--accent) 85%,#12252f)}body[data-theme="light"] .screen-dock{background:#f7fafb;border-top-color:#ccdbe0;border-bottom-color:#dbe5e8;box-shadow:0 -10px 28px rgba(45,69,80,.10)}body[data-theme="light"] .modal{background:#fff;border-color:#cbd9de}body[data-theme="light"] .x{background:#f5f8f9;border-color:#cad8dd;color:#203641}body[data-theme="light"] .table th{background:#eef4f6;color:#526a75}body[data-theme="light"] .table td{border-bottom-color:#dce5e8}body[data-theme="light"] .page > .section-title:first-child{background:linear-gradient(180deg,#fff,#f5f9fa);box-shadow:0 7px 22px rgba(40,60,70,.07)}body[data-theme="light"] .alert{background:#fff9df;color:#66541d}body[data-theme="light"] .alert.good{background:#ecfff3;color:#225d39}body[data-theme="light"] .alert.bad{background:#fff0f2;color:#7b2e3a}
+@media(max-width:520px){.settings-grid,.accent-grid{grid-template-columns:1fr}.page > .section-title:first-child{align-items:flex-start}.page > .section-title:first-child small{text-align:left}}
+
 @media print{.topbar,.bottomnav,.screen-dock,.btnrow,.no-print,.tabs{display:none!important}body{background:white;color:#111;padding:0}.wrap{max-width:none;padding:0}.page{display:none!important}.page.printable{display:block!important}.card,.hero{box-shadow:none;border:1px solid #aaa;background:white;color:#111}.muted,.sub,.item .meta{color:#555!important}.item{background:white;border-color:#aaa}.pill{border:1px solid #777;background:white;color:#111}.table th{background:#eee;color:#111}.table td,.table th{border-color:#bbb}.tablewrap{border-color:#aaa}}
 </style>
 </head>
 <body>
-<header class="topbar"><div class="brandrow"><div class="brand"><div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 15c3-3 5 3 9 0s5-1 7 0" stroke="#5be6d1" stroke-width="1.8" stroke-linecap="round"/><path d="M4 10c2.5-2.6 4.6 2.5 8 0 3.3-2.5 5.6-.7 8 0" stroke="#42b6f5" stroke-width="1.8" stroke-linecap="round"/><path d="M4 5.5c2-2 3.5 1.5 6 0" stroke="#5be6d1" stroke-width="1.8" stroke-linecap="round"/></svg></div><div><h1>Air Quality Pro</h1><small>Field operations & compliance workflow • v0.7</small></div></div><div id="activeJobChip" class="jobchip">No active job</div></div></header>
+<header class="topbar"><div class="brandrow"><div class="brand"><div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 15c3-3 5 3 9 0s5-1 7 0" stroke="#5be6d1" stroke-width="1.8" stroke-linecap="round"/><path d="M4 10c2.5-2.6 4.6 2.5 8 0 3.3-2.5 5.6-.7 8 0" stroke="#42b6f5" stroke-width="1.8" stroke-linecap="round"/><path d="M4 5.5c2-2 3.5 1.5 6 0" stroke="#5be6d1" stroke-width="1.8" stroke-linecap="round"/></svg></div><div><h1>Air Quality Pro</h1><small>Field operations & compliance workflow • v0.8</small></div></div><div id="activeJobChip" class="jobchip">No active job</div></div></header>
 
 <main class="wrap">
 <section id="page-home" class="page active">
@@ -166,9 +180,43 @@ hr{border:0;border-top:1px solid #17323e;margin:14px 0}.muted{color:var(--muted)
     <div class="module"><span class="pill tag">PLANNED</span><b>QA / Compliance</b><p>Audit schedules, calibration status, document control and deadline tracking.</p></div>
     <div class="module"><span class="pill tag">PLANNED</span><b>Reporting</b><p>Cross-module client deliverables, due dates, review status and submissions.</p></div>
   </div>
+  <div class="card"><h3>Settings & customize</h3><p class="sub">Personalize Air Quality Pro without changing your job records.</p><div class="btnrow"><button class="btn primary" data-go="settings">Open settings</button></div></div>
   <div class="card"><h3>Data & backup</h3><p class="sub">All working data is stored locally on this device/browser. Export backups before clearing browser data or moving devices.</p><div class="btnrow"><button class="btn primary" id="backupBtn">Export backup</button><label class="btn" style="display:inline-block">Import backup<input id="restoreFile" type="file" accept="application/json" style="display:none"></label><button class="btn warn" id="demoBtn">Load demo job</button><button class="btn danger" id="clearAllBtn">Clear all app data</button></div></div>
   <div class="card"><h3>Method reference guardrail</h3><p class="sub">Air Quality Pro is a field workflow and recordkeeping aid. The applicable regulation, permit, approved monitoring plan and current EPA method remain controlling. The built-in checks are designed to catch common misses—not replace project-specific QA review.</p></div>
 </section>
+
+
+<section id="page-settings" class="page">
+  <div class="section-title"><h2>Settings & customize</h2><small>PERSONALIZE</small></div>
+  <div class="card">
+    <h3>Appearance</h3><p class="sub">Choose how Air Quality Pro looks on this device. Your preference stays in place when you start a new job.</p>
+    <div class="settings-grid" id="appearanceChoices">
+      <button class="setting-choice" data-appearance="dark"><b>Dark</b><span>Dark field-friendly interface.</span></button>
+      <button class="setting-choice" data-appearance="light"><b>Light</b><span>Brighter interface for daylight use.</span></button>
+      <button class="setting-choice" data-appearance="system"><b>Use phone setting</b><span>Follows the device light/dark setting.</span></button>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Accent color</h3><p class="sub">The selected accent is applied to primary actions, navigation highlights, tabs and interface details.</p>
+    <div class="accent-grid" id="accentChoices">
+      <button class="accent-choice" data-accent="green" style="--swatch:#25d0b1"><span class="accent-dot"></span>Green</button>
+      <button class="accent-choice" data-accent="blue" style="--swatch:#3fa7ff"><span class="accent-dot"></span>Blue</button>
+      <button class="accent-choice" data-accent="orange" style="--swatch:#ff9d45"><span class="accent-dot"></span>Orange</button>
+      <button class="accent-choice" data-accent="purple" style="--swatch:#a879ff"><span class="accent-dot"></span>Purple</button>
+      <button class="accent-choice" data-accent="pink" style="--swatch:#ff67b3"><span class="accent-dot"></span>Pink</button>
+      <button class="accent-choice" data-accent="red" style="--swatch:#ff5d67"><span class="accent-dot"></span>Red</button>
+    </div>
+    <hr>
+    <label>Custom accent color<div class="custom-color-row"><input id="customAccent" type="color" value="#25d0b1"><button class="btn" id="applyCustomAccent">Use custom color</button></div></label>
+  </div>
+  <div class="card">
+    <h3>Preview</h3><p class="sub">Changes apply immediately so you can see them before leaving Settings.</p>
+    <div class="preview-strip"><button class="btn primary">Primary action</button><span class="pill info">Active item</span><span class="pill good">Ready</span></div>
+    <div class="btnrow" style="margin-top:14px"><button class="btn danger" id="resetAppearance">Reset Appearance</button></div>
+    <div class="settings-note">Appearance settings are stored separately from Method 325 job data. Clearing job data will not reset your chosen look.</div>
+  </div>
+</section>
+
 </main>
 
 <div id="screenNavDock" class="screen-dock no-print" aria-label="Screen navigation">
@@ -190,8 +238,37 @@ hr{border:0;border-top:1px solid #17323e;margin:14px 0}.muted{color:var(--muted)
 
 <script>
 (() => {
-// Build v0.7 — single persistent screen navigation; development service-worker caching disabled. Storage key intentionally unchanged.
+// Build v0.8 — consistent navigation + persistent appearance customization; development service-worker caching disabled. Storage key intentionally unchanged.
 const KEY='airQualityPro_v02';
+
+const PREF_KEY='airQualityPro_preferences_v01';
+const ACCENTS={
+  green:['#25d0b1','#62e5d0'],blue:['#3fa7ff','#77c4ff'],orange:['#ff9d45','#ffc06b'],
+  purple:['#a879ff','#c5a7ff'],pink:['#ff67b3','#ff9bca'],red:['#ff5d67','#ff8b92']
+};
+const defaultPrefs=()=>({appearance:'system',accent:'green',customAccent:'#25d0b1'});
+let prefs=loadPrefs();
+function loadPrefs(){try{return Object.assign(defaultPrefs(),JSON.parse(localStorage.getItem(PREF_KEY)||'{}'))}catch(e){return defaultPrefs()}}
+function savePrefs(){localStorage.setItem(PREF_KEY,JSON.stringify(prefs));applyPrefs();renderSettings()}
+function lightenHex(hex,amount=.24){
+  let h=String(hex||'').replace('#','');if(h.length===3)h=[...h].map(c=>c+c).join('');
+  const n=parseInt(h,16);if(Number.isNaN(n))return '#62e5d0';
+  const c=[(n>>16)&255,(n>>8)&255,n&255].map(v=>Math.round(v+(255-v)*amount));
+  return '#'+c.map(v=>v.toString(16).padStart(2,'0')).join('');
+}
+function effectiveTheme(){return prefs.appearance==='system'?(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):prefs.appearance}
+function applyPrefs(){
+  const theme=effectiveTheme();document.body.dataset.theme=theme;
+  const pair=prefs.accent==='custom'?[prefs.customAccent,lightenHex(prefs.customAccent)]:ACCENTS[prefs.accent]||ACCENTS.green;
+  document.documentElement.style.setProperty('--accent',pair[0]);document.documentElement.style.setProperty('--accent2',pair[1]);
+  const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=theme==='light'?'#f7fafb':'#07131b';
+}
+function renderSettings(){
+  $$('[data-appearance]').forEach(b=>b.classList.toggle('active',b.dataset.appearance===prefs.appearance));
+  $$('[data-accent]').forEach(b=>b.classList.toggle('active',b.dataset.accent===prefs.accent));
+  const cp=$('#customAccent');if(cp)cp.value=prefs.customAccent||'#25d0b1';
+}
+
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const uid=p=>(p||'id')+'_'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 const esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
@@ -221,7 +298,8 @@ function updateScreenNav(name){
     field:{back:['site','← Back: Site & locations'],next:['samples','Next: Sample tracker →']},
     samples:{back:['field','← Back: Field operations'],next:['custody','Next: Custody & report →']},
     custody:{back:['samples','← Back: Sample tracker'],next:['more','Next: More tools →']},
-    more:{back:['custody','← Back: Custody & report'],next:['home','Dashboard']}
+    more:{back:['custody','← Back: Custody & report'],next:['home','Dashboard']},
+    settings:{back:['more','← Back: More tools'],next:['home','Dashboard']}
   }[name]||{back:null,next:['home','Dashboard']};
   const back=$('#screenBackBtn'), next=$('#screenNextBtn');
   if(cfg.back){back.style.display='block';back.dataset.go=cfg.back[0];back.textContent=cfg.back[1]}else{back.style.display='none'}
@@ -229,7 +307,7 @@ function updateScreenNav(name){
   const inner=$('#screenNavDock .screen-dock-inner');
   inner.style.gridTemplateColumns=cfg.back&&cfg.next?'repeat(2,minmax(0,1fr))':'1fr';
 }
-function go(name){$$('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));$$('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.go===name));updateScreenNav(name);window.scrollTo({top:0,behavior:'smooth'});renderAll()}
+function go(name){$$('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));const navSection={site:'jobs',custody:'samples',settings:'more'}[name]||name;$$('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.go===navSection));updateScreenNav(name);window.scrollTo({top:0,behavior:'smooth'});renderAll();renderSettings()}
 function download(name,text,type='text/plain'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
 function sampleStatus(s){if(s.receivedAt)return'received';if(s.shippedAt)return'shipped';if(s.recoveredAt)return'recovered';return'deployed'}
 function statusPill(status){const map={deployed:['info','DEPLOYED'],recovered:['good','RECOVERED'],shipped:['warn','SHIPPED'],received:['good','LAB RECEIVED']};const m=map[status]||['','OPEN'];return `<span class="pill ${m[0]}">${m[1]}</span>`}
@@ -290,6 +368,13 @@ $('#backupBtn').onclick=()=>download(`Air_Quality_Pro_Backup_${today()}.json`,JS
 $('#clearAllBtn').onclick=()=>{if(confirm('Clear ALL Air Quality Pro data stored in this browser/device? This cannot be undone unless you exported a backup.')){state=blankState();save();toast('All local data cleared')}};
 $('#demoBtn').onclick=()=>{if(state.jobs.length&&!confirm('Add a demo job alongside your current jobs?'))return;const jid=uid('job'),l1=uid('loc'),l2=uid('loc'),l3=uid('loc'),rid=uid('rnd');const depDate=addDays(today(),-7);const demo={id:jid,client:'Demo Client',facility:'South Louisiana Refinery — Demo',project:'Method 325 Field Demonstration',lead:'Field Supervisor',lab:'Demo Analytical Lab',targets:'Benzene',intervalDays:14,permit:'Training / workflow demo only',createdAt:new Date().toISOString(),site:{footprint:'Monitoring perimeter follows the facility property boundary.',obstacles:'Canal and restricted gate access near north boundary.',offsite:'Highway and neighboring industrial source east of facility.',safety:'Standard refinery PPE and site access requirements.'},met:{name:'MET-01',source:'On-site station',lat:'30.125000',lon:'-90.125000',file:'MET01_logger',status:'ready',windSpeed:true,windDir:true,temp:true,pressure:true},locations:[{id:l1,code:'FL-01',description:'North gate',lat:'30.130001',lon:'-90.125001',access:'Gate 2',hood:'H-01',notes:''},{id:l2,code:'FL-02',description:'East boundary',lat:'30.126000',lon:'-90.119000',access:'Fence road',hood:'H-02',notes:'Highway to east.'},{id:l3,code:'FL-03',description:'Southwest corner',lat:'30.120000',lon:'-90.130000',access:'Canal road',hood:'H-03',notes:''}],rounds:[{id:rid,name:'Demo Round 1',startDate:depDate,endDate:addDays(depDate,14),crew:'Demo Tech',notesText:'',createdAt:new Date().toISOString(),samples:[{id:uid('smp'),tubeId:'AQ-1001',type:'normal',locationId:l1,conditionedDate:addDays(depDate,-5),deployedAt:dt(depDate,'08:10'),heightM:2,deployChecks:{equilibrated:true,inspected:true,gloves:true,vertical:true,shield:true,capsStored:true},deployNotes:''},{id:uid('smp'),tubeId:'AQ-1002',type:'normal',locationId:l2,conditionedDate:addDays(depDate,-5),deployedAt:dt(depDate,'08:32'),heightM:2,deployChecks:{equilibrated:true,inspected:true,gloves:true,vertical:true,shield:true,capsStored:true},deployNotes:''},{id:uid('smp'),tubeId:'AQ-1003',type:'normal',locationId:l3,conditionedDate:addDays(depDate,-5),deployedAt:dt(depDate,'08:55'),heightM:2,deployChecks:{equilibrated:true,inspected:true,gloves:true,vertical:true,shield:true,capsStored:true},deployNotes:''},{id:uid('smp'),tubeId:'BLK-01',type:'blank',locationId:'',conditionedDate:addDays(depDate,-5),deployedAt:dt(depDate,'08:00'),heightM:null,deployChecks:{},deployNotes:'Field blank.'}],notes:[],custody:{}}]};state.jobs.unshift(demo);state.activeJobId=jid;state.activeRoundId=rid;save();toast('Demo job loaded')};
 
+
+$$('[data-appearance]').forEach(b=>b.onclick=()=>{prefs.appearance=b.dataset.appearance;savePrefs();toast('Appearance updated')});
+$$('[data-accent]').forEach(b=>b.onclick=()=>{prefs.accent=b.dataset.accent;savePrefs();toast(`${b.textContent.trim()} accent selected`)});
+$('#applyCustomAccent').onclick=()=>{prefs.customAccent=$('#customAccent').value;prefs.accent='custom';savePrefs();toast('Custom accent applied')};
+$('#resetAppearance').onclick=()=>{prefs=defaultPrefs();localStorage.setItem(PREF_KEY,JSON.stringify(prefs));applyPrefs();renderSettings();toast('Appearance reset')};
+if(window.matchMedia){const mq=matchMedia('(prefers-color-scheme: light)');const syncSystem=()=>{if(prefs.appearance==='system')applyPrefs()};if(mq.addEventListener)mq.addEventListener('change',syncSystem);else if(mq.addListener)mq.addListener(syncSystem)}
+
 // initialize defaults
 $('#depDate').value=today();$('#depTime').value=nowTime();$('#recDate').value=today();$('#recTime').value=nowTime();
 // During active development, remove legacy service workers/caches so Chrome always loads the current build.
@@ -299,6 +384,8 @@ if('serviceWorker' in navigator){
 if('caches' in window){
   caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('air-quality-pro-')).map(k=>caches.delete(k)))).catch(()=>{});
 }
+applyPrefs();
+renderSettings();
 updateScreenNav('home');
 renderAll();
 })();
