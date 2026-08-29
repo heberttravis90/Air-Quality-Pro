@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Air Quality Pro — Force Update v0.7</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#06131a;color:#e8f7f5;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:24px}.card{width:min(520px,100%);background:#0b2029;border:1px solid #24505c;border-radius:18px;padding:24px;box-shadow:0 18px 50px rgba(0,0,0,.35)}h1{font-size:24px;margin:0 0 10px}p{color:#a9c2c8;line-height:1.5}.ok{color:#5be6d1;font-weight:800}.bad{color:#ffb4b4;font-weight:800}button{width:100%;min-height:50px;border-radius:12px;border:1px solid #40e0c2;background:linear-gradient(180deg,#26ceb0,#19aa91);color:#03120f;font-weight:900;font-size:16px;margin-top:12px}
+</style>
+</head>
+<body><main class="card"><h1>Air Quality Pro v0.7 Update</h1><p id="status">Removing the old cached app…</p><button id="open" hidden>Open Air Quality Pro v0.7</button></main>
+<script>
+(async()=>{
+ const status=document.getElementById('status'), btn=document.getElementById('open');
+ try{
+   if('serviceWorker' in navigator){
+     const regs=await navigator.serviceWorker.getRegistrations();
+     await Promise.all(regs.map(r=>r.unregister()));
+   }
+   if('caches' in window){
+     const keys=await caches.keys();
+     await Promise.all(keys.map(k=>caches.delete(k)));
+   }
+   try{localStorage.setItem('aqp_force_update_v07', String(Date.now()));}catch(e){}
+   status.innerHTML='<span class="ok">Old app cache removed.</span> Close any other Air Quality Pro tabs, then tap below.';
+   btn.hidden=false;
+   btn.onclick=()=>location.replace('./index.html?v=07&t='+Date.now());
+ }catch(e){
+   status.innerHTML='<span class="bad">Chrome blocked the automatic reset.</span> Use Chrome Site settings → Storage → Clear data for this site, then reopen Air Quality Pro.';
+   btn.hidden=false;
+   btn.textContent='Try v0.7 anyway';
+   btn.onclick=()=>location.replace('./index.html?v=07&t='+Date.now());
+ }
+})();
+</script></body></html>

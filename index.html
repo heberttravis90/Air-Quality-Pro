@@ -56,7 +56,7 @@ hr{border:0;border-top:1px solid #17323e;margin:14px 0}.muted{color:var(--muted)
 </style>
 </head>
 <body>
-<header class="topbar"><div class="brandrow"><div class="brand"><div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 15c3-3 5 3 9 0s5-1 7 0" stroke="#5be6d1" stroke-width="1.8" stroke-linecap="round"/><path d="M4 10c2.5-2.6 4.6 2.5 8 0 3.3-2.5 5.6-.7 8 0" stroke="#42b6f5" stroke-width="1.8" stroke-linecap="round"/><path d="M4 5.5c2-2 3.5 1.5 6 0" stroke="#5be6d1" stroke-width="1.8" stroke-linecap="round"/></svg></div><div><h1>Air Quality Pro</h1><small>Field operations & compliance workflow • v0.6</small></div></div><div id="activeJobChip" class="jobchip">No active job</div></div></header>
+<header class="topbar"><div class="brandrow"><div class="brand"><div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 15c3-3 5 3 9 0s5-1 7 0" stroke="#5be6d1" stroke-width="1.8" stroke-linecap="round"/><path d="M4 10c2.5-2.6 4.6 2.5 8 0 3.3-2.5 5.6-.7 8 0" stroke="#42b6f5" stroke-width="1.8" stroke-linecap="round"/><path d="M4 5.5c2-2 3.5 1.5 6 0" stroke="#5be6d1" stroke-width="1.8" stroke-linecap="round"/></svg></div><div><h1>Air Quality Pro</h1><small>Field operations & compliance workflow • v0.7</small></div></div><div id="activeJobChip" class="jobchip">No active job</div></div></header>
 
 <main class="wrap">
 <section id="page-home" class="page active">
@@ -190,7 +190,7 @@ hr{border:0;border-top:1px solid #17323e;margin:14px 0}.muted{color:var(--muted)
 
 <script>
 (() => {
-// Build v0.6 — single persistent screen navigation + stronger cache refresh. Storage key intentionally unchanged.
+// Build v0.7 — single persistent screen navigation; development service-worker caching disabled. Storage key intentionally unchanged.
 const KEY='airQualityPro_v02';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const uid=p=>(p||'id')+'_'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
@@ -292,7 +292,13 @@ $('#demoBtn').onclick=()=>{if(state.jobs.length&&!confirm('Add a demo job alongs
 
 // initialize defaults
 $('#depDate').value=today();$('#depTime').value=nowTime();$('#recDate').value=today();$('#recTime').value=nowTime();
-if('serviceWorker' in navigator && location.protocol.startsWith('http')){navigator.serviceWorker.register('./sw.js?v=06',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});}
+// During active development, remove legacy service workers/caches so Chrome always loads the current build.
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.getRegistrations().then(regs=>Promise.all(regs.map(r=>r.unregister()))).catch(()=>{});
+}
+if('caches' in window){
+  caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('air-quality-pro-')).map(k=>caches.delete(k)))).catch(()=>{});
+}
 updateScreenNav('home');
 renderAll();
 })();
