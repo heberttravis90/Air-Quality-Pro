@@ -1,4 +1,4 @@
-// Air Quality Pro v0.7 development worker retirement.
+// Air Quality Pro v1.0 development worker retirement / network-only guard.
 self.addEventListener('install', event => event.waitUntil(self.skipWaiting()));
 self.addEventListener('activate', event => {
   event.waitUntil((async () => {
@@ -9,7 +9,4 @@ self.addEventListener('activate', event => {
     for (const client of clients) client.navigate(client.url);
   })());
 });
-self.addEventListener('fetch', event => {
-  // Network only while retiring this worker. Never serve a cached app shell.
-  event.respondWith(fetch(event.request, {cache:'no-store'}));
-});
+self.addEventListener('fetch', event => event.respondWith(fetch(event.request, {cache:'no-store'})));
