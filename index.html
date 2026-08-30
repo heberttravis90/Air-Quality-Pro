@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <title>Air Quality Pro</title>
-<link rel="manifest" href="manifest.json?v=08" />
+<link rel="manifest" href="manifest.json?v=10" />
 <style>
 :root{
   --bg:#061018;--panel:#0b1822;--panel2:#0f202b;--panel3:#122734;
@@ -66,11 +66,75 @@ body[data-theme="light"]{--bg:#eef4f6;--panel:#ffffff;--panel2:#f6fafb;--panel3:
 body[data-theme="light"] .topbar{background:rgba(247,250,251,.96);border-bottom-color:#d5e0e4}body[data-theme="light"] .jobchip{background:#fff;border-color:#c9d7dd;color:#415b66}body[data-theme="light"] .logo{background:radial-gradient(circle at 30% 20%,color-mix(in srgb,var(--accent) 18%,white),#f7fafb 68%);border-color:color-mix(in srgb,var(--accent) 45%,#c9d7dd)}body[data-theme="light"] .hero{background:linear-gradient(135deg,#ffffff,#edf5f7 72%);border-color:#cbdade}body[data-theme="light"] .hero p{color:#58717c}body[data-theme="light"] .stat,body[data-theme="light"] .card{background:linear-gradient(180deg,#fff,#f8fbfc);border-color:#cfdde2}body[data-theme="light"] .flowbtn,body[data-theme="light"] .btn,body[data-theme="light"] input,body[data-theme="light"] select,body[data-theme="light"] textarea,body[data-theme="light"] .check,body[data-theme="light"] .item,body[data-theme="light"] .tab,body[data-theme="light"] .module,body[data-theme="light"] .setting-choice,body[data-theme="light"] .accent-choice{background:#fff;border-color:#cad9df;color:var(--text)}body[data-theme="light"] .flowbtn:active{background:#eaf4f5}body[data-theme="light"] .flowbtn .num{background:color-mix(in srgb,var(--accent) 15%,white);color:color-mix(in srgb,var(--accent) 80%,#12252f)}body[data-theme="light"] .btn.ghost{background:transparent}body[data-theme="light"] .btn.blue{background:#eaf5ff;border-color:#a8cfea}body[data-theme="light"] .btn.warn{background:#fff8df;border-color:#dfc66c}body[data-theme="light"] .btn.danger{background:#fff0f2;border-color:#df9ba6}body[data-theme="light"] .empty{border-color:#c7d7dd;color:#70858e}body[data-theme="light"] .bottomnav{background:rgba(250,252,253,.98);border-top-color:#d1dde1}body[data-theme="light"] .navbtn{color:#758993}body[data-theme="light"] .navbtn.active{background:color-mix(in srgb,var(--accent) 11%,white);color:color-mix(in srgb,var(--accent) 85%,#12252f)}body[data-theme="light"] .screen-dock{background:#f7fafb;border-top-color:#ccdbe0;border-bottom-color:#dbe5e8;box-shadow:0 -10px 28px rgba(45,69,80,.10)}body[data-theme="light"] .modal{background:#fff;border-color:#cbd9de}body[data-theme="light"] .x{background:#f5f8f9;border-color:#cad8dd;color:#203641}body[data-theme="light"] .table th{background:#eef4f6;color:#526a75}body[data-theme="light"] .table td{border-bottom-color:#dce5e8}body[data-theme="light"] .page > .section-title:first-child{background:linear-gradient(180deg,#fff,#f5f9fa);box-shadow:0 7px 22px rgba(40,60,70,.07)}body[data-theme="light"] .alert{background:#fff9df;color:#66541d}body[data-theme="light"] .alert.good{background:#ecfff3;color:#225d39}body[data-theme="light"] .alert.bad{background:#fff0f2;color:#7b2e3a}
 @media(max-width:520px){.settings-grid,.accent-grid{grid-template-columns:1fr}.page > .section-title:first-child{align-items:flex-start}.page > .section-title:first-child small{text-align:left}}
 
+
+/* v0.10 full-app accent propagation */
+html,body{background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 4%,#061018) 0%,color-mix(in srgb,var(--accent) 2%,#08131c) 100%)}
+.topbar{border-bottom-color:color-mix(in srgb,var(--accent) 34%,#14303d);box-shadow:0 8px 26px color-mix(in srgb,var(--accent) 5%,transparent)}
+.logo{border-color:color-mix(in srgb,var(--accent) 62%,#2d6f6a);background:radial-gradient(circle at 30% 20%,color-mix(in srgb,var(--accent) 28%,#0a1b24),#0a1b24 68%);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 9%,transparent)}
+.jobchip{border-color:color-mix(in srgb,var(--accent) 34%,#214355);background:color-mix(in srgb,var(--accent) 7%,#0c1e29);color:color-mix(in srgb,var(--accent2) 28%,#b8d1dc)}
+.hero{background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 13%,#0e2730),#0a1a24 66%);border-color:color-mix(in srgb,var(--accent) 42%,#1d4550)}
+.hero h2,.page > .section-title:first-child h2{color:color-mix(in srgb,var(--accent2) 26%,var(--text))}
+.stat{border-color:color-mix(in srgb,var(--accent) 24%,#173443);background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 4%,var(--panel)),var(--panel))}
+.card{background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 5%,var(--panel)),#091620);border-color:color-mix(in srgb,var(--accent) 26%,#173443)}
+.page > .section-title:first-child{border-color:color-mix(in srgb,var(--accent) 32%,var(--line));background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 7%,var(--panel2)),var(--panel))}
+.page > .section-title:first-child small{color:color-mix(in srgb,var(--accent2) 48%,var(--muted))}
+.flowbtn{border-color:color-mix(in srgb,var(--accent) 34%,#1c4452);background:color-mix(in srgb,var(--accent) 6%,#0d1e29)}
+.flowbtn:active{background:color-mix(in srgb,var(--accent) 15%,#12303a);border-color:color-mix(in srgb,var(--accent) 65%,#1c4452)}
+.flowbtn .num{background:color-mix(in srgb,var(--accent) 17%,#133b3c);color:var(--accent2);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 25%,transparent)}
+.btn{border-color:color-mix(in srgb,var(--accent) 34%,#25505c);background:color-mix(in srgb,var(--accent) 8%,#10242e)}
+.btn.primary{background:linear-gradient(180deg,var(--accent2),var(--accent));color:color-mix(in srgb,var(--accent) 15%,#03120f);border-color:color-mix(in srgb,var(--accent2) 78%,white);box-shadow:0 7px 18px color-mix(in srgb,var(--accent) 16%,transparent)}
+.btn.ghost{border-color:color-mix(in srgb,var(--accent) 34%,#25505c)}
+.screen-dock{background:color-mix(in srgb,var(--accent) 5%,#081923);border-top-color:color-mix(in srgb,var(--accent) 42%,#24505c);border-bottom-color:color-mix(in srgb,var(--accent) 28%,#163642)}
+input,select,textarea{border-color:color-mix(in srgb,var(--accent) 24%,#214150);background:color-mix(in srgb,var(--accent) 3%,#07151d)}
+.check{border-color:color-mix(in srgb,var(--accent) 25%,#173541);background:color-mix(in srgb,var(--accent) 4%,#0a1922)}
+.item{border-color:color-mix(in srgb,var(--accent) 27%,#183744);background:color-mix(in srgb,var(--accent) 4%,#0a1922)}
+.pill{border-color:color-mix(in srgb,var(--accent) 42%,#28505f);background:color-mix(in srgb,var(--accent) 9%,#10242d);color:color-mix(in srgb,var(--accent2) 25%,#c6d8df)}
+.pill.info{color:var(--accent2);border-color:color-mix(in srgb,var(--accent) 58%,#315e80);background:color-mix(in srgb,var(--accent) 14%,#11293c)}
+.empty{border-color:color-mix(in srgb,var(--accent) 33%,#254452);color:color-mix(in srgb,var(--accent2) 16%,#78929f)}
+.progress{background:color-mix(in srgb,var(--accent) 4%,#08131a);border-color:color-mix(in srgb,var(--accent) 28%,#19313d)}
+.tab{border-color:color-mix(in srgb,var(--accent) 32%,#1b4050);background:color-mix(in srgb,var(--accent) 5%,#0a1922);color:color-mix(in srgb,var(--accent2) 16%,#8fa7b3)}
+.tab.active{color:color-mix(in srgb,var(--accent) 15%,#05201b);background:var(--accent);border-color:var(--accent2);box-shadow:0 6px 16px color-mix(in srgb,var(--accent) 14%,transparent)}
+.tablewrap{border-color:color-mix(in srgb,var(--accent) 28%,#193743)}
+.table th{background:color-mix(in srgb,var(--accent) 7%,#10242d);color:color-mix(in srgb,var(--accent2) 18%,#9eb5c0);border-bottom-color:color-mix(in srgb,var(--accent) 25%,#234552)}
+.table td{border-bottom-color:color-mix(in srgb,var(--accent) 15%,#142e39)}
+.module{border-color:color-mix(in srgb,var(--accent) 22%,#193b48);background:color-mix(in srgb,var(--accent) 3%,#0a1922)}
+.module.active{border-color:color-mix(in srgb,var(--accent) 72%,#25505c);background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 19%,#0a1922),#0a1922);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 9%,transparent)}
+.bottomnav{border-top-color:color-mix(in srgb,var(--accent) 32%,#14313d);box-shadow:0 -8px 24px color-mix(in srgb,var(--accent) 5%,transparent)}
+.navbtn.active{color:var(--accent2);background:color-mix(in srgb,var(--accent) 13%,#0d242a);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 15%,transparent)}
+.toast{background:color-mix(in srgb,var(--accent2) 78%,white);color:color-mix(in srgb,var(--accent) 18%,#071712);box-shadow:0 10px 28px color-mix(in srgb,var(--accent) 20%,transparent)}
+.modal{border-color:color-mix(in srgb,var(--accent) 38%,#24505e);background:color-mix(in srgb,var(--accent) 4%,#0a1821)}
+.x{border-color:color-mix(in srgb,var(--accent) 28%,#284957);background:color-mix(in srgb,var(--accent) 6%,#0e222c)}
+.bigstatus{border-color:color-mix(in srgb,var(--accent) 26%,#1a3c48);background:color-mix(in srgb,var(--accent) 4%,#0c1c26)}
+hr{border-top-color:color-mix(in srgb,var(--accent) 24%,#17323e)}
+.setting-choice,.accent-choice{border-color:color-mix(in srgb,var(--accent) 20%,var(--line));background:color-mix(in srgb,var(--accent) 3%,var(--panel2))}
+.setting-choice.active,.accent-choice.active{background:color-mix(in srgb,var(--accent) 10%,var(--panel2))}
+
+body[data-theme="light"]{background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 4%,#eef4f6) 0%,color-mix(in srgb,var(--accent) 2%,#f7fafb) 100%)}
+body[data-theme="light"] .topbar{border-bottom-color:color-mix(in srgb,var(--accent) 28%,#d5e0e4)}
+body[data-theme="light"] .jobchip{background:color-mix(in srgb,var(--accent) 5%,white);border-color:color-mix(in srgb,var(--accent) 28%,#c9d7dd);color:color-mix(in srgb,var(--accent) 24%,#415b66)}
+body[data-theme="light"] .hero{background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 6%,white),color-mix(in srgb,var(--accent) 4%,#edf5f7) 72%);border-color:color-mix(in srgb,var(--accent) 28%,#cbdade)}
+body[data-theme="light"] .stat,body[data-theme="light"] .card{background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 3%,white),#f8fbfc);border-color:color-mix(in srgb,var(--accent) 22%,#cfdde2)}
+body[data-theme="light"] .flowbtn,body[data-theme="light"] .btn,body[data-theme="light"] input,body[data-theme="light"] select,body[data-theme="light"] textarea,body[data-theme="light"] .check,body[data-theme="light"] .item,body[data-theme="light"] .tab,body[data-theme="light"] .module,body[data-theme="light"] .setting-choice,body[data-theme="light"] .accent-choice{background:color-mix(in srgb,var(--accent) 2.5%,white);border-color:color-mix(in srgb,var(--accent) 22%,#cad9df);color:var(--text)}
+body[data-theme="light"] .btn.primary{background:linear-gradient(180deg,var(--accent2),var(--accent));border-color:color-mix(in srgb,var(--accent) 55%,#b6cbd2);color:color-mix(in srgb,var(--accent) 18%,#10252b)}
+body[data-theme="light"] .btn.ghost{background:transparent}
+body[data-theme="light"] .btn.blue{background:#eaf5ff;border-color:#a8cfea}body[data-theme="light"] .btn.warn{background:#fff8df;border-color:#dfc66c}body[data-theme="light"] .btn.danger{background:#fff0f2;border-color:#df9ba6}
+body[data-theme="light"] .pill{background:color-mix(in srgb,var(--accent) 6%,white);border-color:color-mix(in srgb,var(--accent) 30%,#c9d7dd);color:color-mix(in srgb,var(--accent) 22%,#415b66)}
+body[data-theme="light"] .pill.good{background:#ecfff3;border-color:#9ed6b2;color:#225d39}body[data-theme="light"] .pill.warn{background:#fff8df;border-color:#dfc66c;color:#66541d}body[data-theme="light"] .pill.bad{background:#fff0f2;border-color:#df9ba6;color:#7b2e3a}
+body[data-theme="light"] .pill.info{background:color-mix(in srgb,var(--accent) 9%,white);border-color:color-mix(in srgb,var(--accent) 38%,#c9d7dd);color:color-mix(in srgb,var(--accent) 72%,#12252f)}
+body[data-theme="light"] .tab.active{background:var(--accent);border-color:var(--accent2);color:color-mix(in srgb,var(--accent) 18%,#10252b)}
+body[data-theme="light"] .module.active{background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 13%,white),#f8fbfc);border-color:color-mix(in srgb,var(--accent) 52%,#cbdade)}
+body[data-theme="light"] .bottomnav{border-top-color:color-mix(in srgb,var(--accent) 25%,#d1dde1)}
+body[data-theme="light"] .screen-dock{background:color-mix(in srgb,var(--accent) 2%,#f7fafb);border-top-color:color-mix(in srgb,var(--accent) 26%,#ccdbe0);border-bottom-color:color-mix(in srgb,var(--accent) 18%,#dbe5e8)}
+body[data-theme="light"] .modal{background:color-mix(in srgb,var(--accent) 2%,white);border-color:color-mix(in srgb,var(--accent) 24%,#cbd9de)}
+body[data-theme="light"] .x{background:color-mix(in srgb,var(--accent) 3%,#f5f8f9);border-color:color-mix(in srgb,var(--accent) 22%,#cad8dd);color:#203641}
+body[data-theme="light"] .table th{background:color-mix(in srgb,var(--accent) 5%,#eef4f6);color:color-mix(in srgb,var(--accent) 18%,#526a75)}
+body[data-theme="light"] .page > .section-title:first-child{background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 4%,white),#f5f9fa);border-color:color-mix(in srgb,var(--accent) 23%,#c9d7dd)}
+
 @media print{.topbar,.bottomnav,.screen-dock,.btnrow,.no-print,.tabs{display:none!important}body{background:white;color:#111;padding:0}.wrap{max-width:none;padding:0}.page{display:none!important}.page.printable{display:block!important}.card,.hero{box-shadow:none;border:1px solid #aaa;background:white;color:#111}.muted,.sub,.item .meta{color:#555!important}.item{background:white;border-color:#aaa}.pill{border:1px solid #777;background:white;color:#111}.table th{background:#eee;color:#111}.table td,.table th{border-color:#bbb}.tablewrap{border-color:#aaa}}
 </style>
 </head>
 <body>
-<header class="topbar"><div class="brandrow"><div class="brand"><div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 15c3-3 5 3 9 0s5-1 7 0" stroke="#5be6d1" stroke-width="1.8" stroke-linecap="round"/><path d="M4 10c2.5-2.6 4.6 2.5 8 0 3.3-2.5 5.6-.7 8 0" stroke="#42b6f5" stroke-width="1.8" stroke-linecap="round"/><path d="M4 5.5c2-2 3.5 1.5 6 0" stroke="#5be6d1" stroke-width="1.8" stroke-linecap="round"/></svg></div><div><h1>Air Quality Pro</h1><small>Field operations & compliance workflow • v0.9</small></div></div><div id="activeJobChip" class="jobchip">No active job</div></div></header>
+<header class="topbar"><div class="brandrow"><div class="brand"><div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 15c3-3 5 3 9 0s5-1 7 0" stroke="#5be6d1" stroke-width="1.8" stroke-linecap="round"/><path d="M4 10c2.5-2.6 4.6 2.5 8 0 3.3-2.5 5.6-.7 8 0" stroke="#42b6f5" stroke-width="1.8" stroke-linecap="round"/><path d="M4 5.5c2-2 3.5 1.5 6 0" stroke="#5be6d1" stroke-width="1.8" stroke-linecap="round"/></svg></div><div><h1>Air Quality Pro</h1><small>Field operations & compliance workflow • v0.10</small></div></div><div id="activeJobChip" class="jobchip">No active job</div></div></header>
 
 <main class="wrap">
 <section id="page-home" class="page active">
