@@ -1,0 +1,15 @@
+Air Quality Pro v1.1 — Field-Proof Depth Pass
+
+- Program-specific operational forms for Ambient, Meteorology, CEMS, Cooling Towers, and LDAR/IR
+- Automatic QA flags from failed QC, overdue follow-up, entered completeness/recovery targets, action-level exceedances, CEMS outages, and LDAR thresholds
+- Edit support across schedule, crew, equipment, sites, program records, QA, corrective actions, and reports
+- Equipment calibration/maintenance history logs, certificate references, maintenance due dates, and safer ready/do-not-use handling
+- Technician certification/training expiration tracking
+- Search/filter controls across major operations modules
+- Corrective action root-cause, containment, resolution, and closure verification workflow
+- Report workflow now supports reporting periods, linked program records, QA release-gate context, approvals/signatures, and status progression
+- Reusable site records expanded with GPS, PPE, emergency/muster, site hours and contact details
+- Schedule adds program, priority, recurring generation, completion stamps and overdue readiness
+- Existing Method 325 workflow and local-storage data remain compatible
+
+Important: Air Quality Pro remains a workflow/recordkeeping aid. Applicable regulations, permits, approved monitoring plans, current methods, and project-specific QA procedures control.

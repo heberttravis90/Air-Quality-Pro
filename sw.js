@@ -1,4 +1,4 @@
-// Air Quality Pro v1.0 development worker retirement / network-only guard.
+// Air Quality Pro v1.1 development worker retirement / network-only guard.
 self.addEventListener('install', event => event.waitUntil(self.skipWaiting()));
 self.addEventListener('activate', event => {
   event.waitUntil((async () => {
